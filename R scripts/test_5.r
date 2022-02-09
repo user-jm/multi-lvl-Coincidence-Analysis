@@ -1,15 +1,14 @@
-# fuenfter Test: Baumgartners Beispiele
+# fifth test: Baumgartner's example "women"
 library(cna)
 
-setwd("..") # Ausgabe soll in uebergeordneten Ordner erzeugt werden
+setwd("..") # export output file to parent folder
 
-sink(file = "r_output.txt") # Ausgabe werden ab hier in Datei gespeichert
+sink(file = "r_output.txt") # start to export R output into file 
 
-print(cna(d.women, # unserer Datensatz
-  rm.dup.factors=FALSE, # verwerfe Spalten mit identischen Eintraegen nicht
-  maxstep=c(5,5,10), # maximal 5 Konjunkte, 5 Disjunkte und 10 Faktoren
-  what = "a", # zeige nur atomare Loesungsformeln
+print(cna(d.women, # data set "women"
+  rm.dup.factors=FALSE, # do not discard logically equivalent factors
+  maxstep=c(5,5,10), # at most 5 conjuncts, 5 disjuncts and 10 factors per formula
   details = FALSE),
-  nsolutions = "all") # gib alle Loesungen an
+  nsolutions = "all") # return all solutions
 
-sink(file = NULL) # Ausgabe in Datei endet hier
+sink(file = NULL) # stop exporting the output into file

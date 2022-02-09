@@ -1,83 +1,83 @@
-# Jens' Beispiel
+# second test -- a simple causal chain
 library(cna)
 
-rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-cnames <- c("A","B","C","D","E","F","G","H","I","J")
+rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) # row names
+cnames <- c("A","B","C","D","E","F","G","H","I","J") # column names = names of causal factors
 
-data_set <- array(0, dim=c(16,10),dimnames=list(rnames,cnames))
+data_set <- array(0, dim=c(16,10),dimnames=list(rnames,cnames)) # a table of 16 rows and 10 columns each referenced by the entries in 
+# rnames and cnames
 
-# erste Zeile alles auf 1
+# first row all factors are true
 data_set[1,] <- 1
 
-# zweite Zeile D,E,G auf 1
-wahr <- c("A","D","E","F","G")
-data_set[2,wahr] <- 1
+# second row A,D,E,F,G are true
+true <- c("A","D","E","F","G")
+data_set[2,true] <- 1
 
-# dritte Zeile D,E,H auf 1
-wahr <- c("A","D","E","F","H")
-data_set[3,wahr] <- 1
+# third row D,E,H are true
+true <- c("A","D","E","F","H")
+data_set[3,true] <- 1
 
-# vierte Zeile D,G,H auf 1
-wahr <- c("B","D","G","H","I")
-data_set[4,wahr] <- 1
+# fourth row D,G,H are true
+true <- c("B","D","G","H","I")
+data_set[4,true] <- 1
 
-# fuenfte Zeile E,G,H auf 1
-wahr <- c("B","E","G","H","I")
-data_set[5,wahr] <- 1
+# fifth row E,G,H are  true
+true <- c("B","E","G","H","I")
+data_set[5,true] <- 1
 
-# sechste Zeile D,E auf 1
-wahr <- c("A","D","E","F")
-data_set[6,wahr] <- 1
+# sixth row D,E are  true
+true <- c("A","D","E","F")
+data_set[6,true] <- 1
 
-# siebente Zeile D,G auf 1
-wahr <- c("D","G")
-data_set[7,wahr] <- 1
+# seventh row D,G are  true
+true <- c("D","G")
+data_set[7,true] <- 1
 
-# achte Zeile D,H auf 1
-wahr <- c("D","H")
-data_set[8,wahr] <- 1
+# eighth row D,H are  true
+true <- c("D","H")
+data_set[8,true] <- 1
 
-# neunte Zeile E,G auf 1
-wahr <- c("E","G")
-data_set[9,wahr] <- 1
+# ninth row E,G are  true
+true <- c("E","G")
+data_set[9,true] <- 1
 
-# zehnte Zeile E,H auf 1
-wahr <- c("E","H")
-data_set[10,wahr] <- 1
+# tenth row E,H are  true
+true <- c("E","H")
+data_set[10,true] <- 1
 
-# elfte Zeile H,G auf 1
-wahr <- c("B","H","G","I")
-data_set[11,wahr] <- 1
+# eleventh row H,G are  true
+true <- c("B","H","G","I")
+data_set[11,true] <- 1
 
-# zwoelfte Zeile D auf 1
-wahr <- c("D")
-data_set[12,wahr] <- 1
+# twelfth row D is  true
+true <- c("D")
+data_set[12,true] <- 1
 
-# dreizehnte Zeile E auf 1
-wahr <- c("E")
-data_set[13,wahr] <- 1
+# thirdteenth row E is  true
+true <- c("E")
+data_set[13,true] <- 1
 
-# vierzehnte Zeile G auf 1
-wahr <- c("G")
-data_set[14,wahr] <- 1
+# fourteenth row G is  true
+true <- c("G")
+data_set[14,true] <- 1
 
-# fuenfzehnte Zeile H auf 1
-wahr <- c("H")
-data_set[15,wahr] <- 1
+# fifteenth row H is  true
+true <- c("H")
+data_set[15,true] <- 1
 
-# sechzehnte Zeile alles auf 0
+# sixteenth row all factors are false
 
-setwd("..") # Ausgabe soll in uebergeordneten Ordner erzeugt werden
+setwd("..") # export output file to parent folder
 
-sink(file = "r_output.txt") # Ausgabe werden ab hier in Datei gespeichert
+sink(file = "r_output.txt") # start to export R output into file 
 
-print(cna(data_set, # unserer Datensatz
-  rm.dup.factors=FALSE, # verwerfe Spalten mit identischen Eintraegen nicht
-  maxstep=c(5,5,10), # maximal 5 Konjunkte, 5 Disjunkte und 10 Faktoren
-#  what = "a", # zeige nur atomare Loesungsformeln
+print(cna(data_set, # use the truth table data_set
+  rm.dup.factors=FALSE, # do not discard logically equivalent factors
+  maxstep=c(5,5,10), # at most 5 conjuncts, 5 disjuncts and 10 factors per formula
   details = FALSE,
-  strict = FALSE,
-  ordering = list(c("D","E","F","G","H","I","J"),c("A", "B","C"))), # ordering(e_1,e_2,...) setzt e_2 downstream bezueglich e_1, hier werden die Ebenen separiert
-  nsolutions = "all") # gib alle Loesungen an
+  ordering = list(c("D","E","F","G","H","I","J"),c("A", "B","C"))), # ordering(e_1,e_2,...) places e_2 causally downstream to e_1
+  # this is how the constitution levels get separated
+  nsolutions = "all") # return all solutions
 
-sink(file = NULL) # Ausgabe in Datei endet hier
+sink(file = NULL) # stop exporting into file

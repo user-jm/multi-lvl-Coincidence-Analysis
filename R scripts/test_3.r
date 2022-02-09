@@ -1,84 +1,87 @@
-# Test -- eindeutige Loesung mit Konjunktionen, Disjunktionen und Negationen
+# third test -- unique causal chain with conjuncts, disjuncts and negations
+
 library(cna)
 
-rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-cnames <- c("A","B","C","D","E","F","G","H","I","J")
+rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) # row names
+cnames <- c("A","B","C","D","E","F","G","H","I","J") # column names = names of causal factors
 
-data_set <- array(0, dim=c(16,10),dimnames=list(rnames,cnames))
+data_set <- array(0, dim=c(16,10),dimnames=list(rnames,cnames)) # a table of 16 rows and 10 columns each referenced by the entries in 
+# rnames and cnames
 
-# erste Zeile alles bis auf D auf 1
-wahr <- c("A","B","C","E","F","G","H","I","J")
-data_set[1,] <- 1
+# first row everything but D is true
+true <- c("A","B","C","E","F","G","H","I","J")
+data_set[1,true] <- 1
 
-# zweite Zeile D,E,G auf 1
-wahr <- c("A","E","F","G")
-data_set[2,wahr] <- 1
+# second row A,E,F,G are true
+true <- c("A","E","F","G")
+data_set[2,true] <- 1
 
-# dritte Zeile D,E,H auf 1
-wahr <- c("A","E","F","H")
-data_set[3,wahr] <- 1
+# third row A,E,F,H are true
+true <- c("A","E","F","H")
+data_set[3,true] <- 1
 
-# vierte Zeile D,G,H auf 1
-wahr <- c("A","B","C","F","G","H","I","J")
-data_set[4,wahr] <- 1
+# fourth row A,B,C,F,G,H,I,J are true
+true <- c("A","B","C","F","G","H","I","J")
+data_set[4,true] <- 1
 
-# fuenfte Zeile E,G,H auf 1
-wahr <- c("A","B","C","D","E","F","G","H","I","J")
-data_set[5,wahr] <- 1
+# fifth row everything is true
+true <- c("A","B","C","D","E","F","G","H","I","J")
+data_set[5,true] <- 1
 
-# sechste Zeile D,E auf 1
-wahr <- c("A","E","F")
-data_set[6,wahr] <- 1
+# sixth row A,E,F are true
+true <- c("A","E","F")
+data_set[6,true] <- 1
 
-# siebente Zeile D,G auf 1
-wahr <- c("A","F","G")
-data_set[7,wahr] <- 1
+# seventh row A,F,G are true
+true <- c("A","F","G")
+data_set[7,true] <- 1
 
-# achte Zeile D,H auf 1
-wahr <- c("A","F","H")
-data_set[8,wahr] <- 1
+# eighth row A,F,H are true
+true <- c("A","F","H")
+data_set[8,true] <- 1
 
-# neunte Zeile E,G auf 1
-wahr <- c("A","D","E","F","G")
-data_set[9,wahr] <- 1
+# ninth row A,D,E,F,G are true
+true <- c("A","D","E","F","G")
+data_set[9,true] <- 1
 
-# zehnte Zeile E,H auf 1
-wahr <- c("A","D","E","F","H")
-data_set[10,wahr] <- 1
+# tenth row A,D,E,F,H are true
+true <- c("A","D","E","F","H")
+data_set[10,true] <- 1
 
-# elfte Zeile H,G auf 1
-wahr <- c("B","D","H","G","I")
-data_set[11,wahr] <- 1
+# eleventh row B,D,H,G,I are true
+true <- c("B","D","H","G","I")
+data_set[11,true] <- 1
 
-# zwoelfte Zeile D auf 1
-wahr <- c("A","F")
-data_set[12,wahr] <- 1
+# twelfth row A,F are true
+true <- c("A","F")
+data_set[12,true] <- 1
 
-# dreizehnte Zeile E auf 1
-wahr <- c("A","D","E","F")
-data_set[13,wahr] <- 1
+# thirdteenth row A,D,E,F are true
+true <- c("A","D","E","F")
+data_set[13,true] <- 1
 
-# vierzehnte Zeile G auf 1
-wahr <- c("D","G")
-data_set[14,wahr] <- 1
+# fourteenth row D,G are true
+true <- c("D","G")
+data_set[14,true] <- 1
 
-# fuenfzehnte Zeile H auf 1
-wahr <- c("D","H")
-data_set[15,wahr] <- 1
+# fifteenth row D,H are true
+true <- c("D","H")
+data_set[15,true] <- 1
 
-# sechzehnte Zeile alles auf 0
-wahr <- c("D")
-data_set[16,wahr] <- 1
-setwd("..") # Ausgabe soll in uebergeordneten Ordner erzeugt werden
+# sixteenth row only D is true
+true <- c("D")
+data_set[16,true] <- 1
 
-sink(file = "r_output.txt") # Ausgabe werden ab hier in Datei gespeichert
+setwd("..") # export output file to parent folder
 
-print(cna(data_set, # unserer Datensatz
-  rm.dup.factors=FALSE, # verwerfe Spalten mit identischen Eintraegen nicht
-  maxstep=c(5,5,10), # maximal 5 Konjunkte, 5 Disjunkte und 10 Faktoren
-  what = "a", # zeige nur atomare Loesungsformeln
+sink(file = "r_output.txt") # start to export R output into file 
+
+print(cna(data_set, # use the truth table data_set
+  rm.dup.factors=FALSE, # do not discard logically equivalent factors
+  maxstep=c(5,5,10), # at most 5 conjuncts, 5 disjuncts and 10 factors per formula
   details = FALSE,
-  ordering = list(c("D","E","F","G","H","I","J"),c("A", "B","C"))), # ordering(e_1,e_2,...) setzt e_2 downstream bezueglich e_1, hier werden die Ebenen separiert
-  nsolutions = "all") # gib alle Loesungen an
+  ordering = list(c("D","E","F","G","H","I","J"),c("A", "B","C"))), # ordering(e_1,e_2,...) places e_2 causally downstream to e_1
+  # this is how the constitution levels get separated
+  nsolutions = "all") # return all solutions
 
-sink(file = NULL) # Ausgabe in Datei endet hier
+sink(file = NULL) # stop exporting into file

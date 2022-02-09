@@ -7,24 +7,24 @@
   \fill [green, opacity=.25] (#1) circle [radius=3mm]; }%
 \def\hilighttarget#1{\draw[densely dashed,-latex] ($(#1)+(3mm,0)$) -> ($(#1)+(8mm,0)$);%
   \fill [red, opacity=.25] (#1) circle [radius=3mm]; }%
-% Laengenkonstanten
-\def\LNeg{0.03cm}% Abstand des Negationssymbols von der Ausgangsnode
-\def\LConj{-0.5cm}% Abstand des Konjuntions-Knotenpunktes von der Zielnode
-\def\hDisjConj{0.9cm}% horizontale Positionierung des Konjuntions-Knotenpunktes innerhalb einer Disjunktion von der ersten Ausgangsnode
-\def\vDisjConj{0.2cm}% vertikale Positionierung des Konjuntions-Knotenpunktes innerhalb einer Disjunktion von der ersten Ausgangsnode
-\def\tDisjConj{0.3cm}% Verschiebung eines Konjunktionsknotenpunktes, falls mehrere innerhalb von Disjunktionen am gleichen Faktor zusammenfallen
-\def\LvDist{0.8cm}% vertikaler Abstand uebereinander befindlicher Nodes der selben Ebene
-\def\LhDist{1.2cm}% horizontaler Abstand nebeneinander befindlicher Nodes
-\def\iLvDist{1.4cm}% vertikaler Abstand zwischen benachbarten Ebenen
-\def\HeightNode{0.6cm}% Hoehe einer Node
+% definition of constants
+\def\LNeg{0.03cm}% distance of the negation symbol to the corresponding node of the causal factor
+\def\LConj{-0.5cm}% distance of the conjunction junction to the target node
+\def\hDisjConj{0.9cm}% horizontal position of conjunction junction of a disjunction relative to the first source node
+\def\vDisjConj{0.2cm}% vertical position of conjunction junction of a disjunction relative to the first source node
+\def\tDisjConj{0.3cm}% shift of  conjunction junction in case that it would overlap with another junction
+\def\LvDist{0.8cm}% vertical distance between nodes of the same level and causal order
+\def\LhDist{1.2cm}% horizontal distance between nodes of the same level and subsequent causal orders
+\def\iLvDist{1.4cm}% vertical distance between neighbouring levels
+\def\HeightNode{0.6cm}% hight of nodes
 \begin{tikzpicture}[>=latex,%
-  every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt},% gilt fuer alle normalen Nodes
-  aux/.style={circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm},% Hilfsnodes an Konjunktionsschnittpunkten
-  neg/.style={diamond, draw, minimum size=1mm, text width=1mm},% Hilfsnode Negation
-  conjunctonsegment/.style={in=170,out=-10},% gewoelbte Verbindungen um konjunktive Verbindungen einfach von disjunktiven unterscheiden zu koennen
-  crelationleft/.style={->,densely dotted,opacity=0.6,in=200,out=120},% Linienstil linksumschliessende Konstitutionsbeziehung
-  crelationright/.style={->,densely dotted,opacity=0.6,in=-20,out=60},% Linienstil rechtsumschliessende Konstitutionsbeziehung
-  crelationstraight/.style={->,densely dotted,opacity=0.6}]% Linienstil geradlinige Konstitutionsbeziehung
+  every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt},% definition for normal nodes = nodes of causal factors
+  aux/.style={circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm},% auxiliary nodes for conjunction junctions
+  neg/.style={diamond, draw, minimum size=1mm, text width=1mm},% auxiliary nodes for negations
+  conjunctonsegment/.style={in=170,out=-10},% conjuctive connection lines are curved to easily distinguish them from disjunctions
+  crelationleft/.style={->,densely dotted,opacity=0.6,in=200,out=120},% style for the leftside constitution relations
+  crelationright/.style={->,densely dotted,opacity=0.6,in=-20,out=60},% style for the rightside constitution relations
+  crelationstraight/.style={->,densely dotted,opacity=0.6}]% style for single constitution relations
 % Begin formula from file
 \VAR{tex_formula}
 % End formula from file
