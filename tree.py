@@ -1,42 +1,35 @@
 #!/usr/bin/env python3
 
-# teilweise uebernommen von https://developpaper.com/question/how-does-python-generate-trees-recursively/
+# simple tree with deep search function 
 
 class Tree:
 
     def __init__(self, name):
+        # initiate function
         self.name = name
         self.children = {}
 
     def __iter__(self):
+        # how to iterate through the tree
         return iter(self.children)
 
     def __str__(self):
+        # output of str(tree)
         return self.name
 
     def __repr__(self):
+        # output of print(tree)
         return 'Tree("{}")'.format(self.name)
 
     def add_child(self, child):
+        # add child below the current node
         self.children[child] = child
         return child
     
-    
-    
-    def dfs(self, include_self=True):
+    def deep_search(self, include_self=True):
+        # deep search through the tree
         if include_self:
             yield self
         for child in self.children:
             yield child
-            yield from child.dfs(False)
-
-    def bfs(self, include_self=True):
-        if include_self:
-            yield self
-        trees = list(self.children.keys())
-        while True:
-            if not trees:
-                break
-            tree = trees.pop(0)
-            yield tree
-            trees += list(tree.children.keys())
+            yield from child.deep_search(False)

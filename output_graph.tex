@@ -22,9 +22,9 @@
   aux/.style={circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm},% Hilfsnodes an Konjunktionsschnittpunkten
   neg/.style={diamond, draw, minimum size=1mm, text width=1mm},% Hilfsnode Negation
   conjunctonsegment/.style={in=170,out=-10},% gewoelbte Verbindungen um konjunktive Verbindungen einfach von disjunktiven unterscheiden zu koennen
-  crelationleft/.style={densely dotted,opacity=0.6,in=180,out=180},% Linienstil linksumschliessende Konstitutionsbeziehung
-  crelationright/.style={densely dotted,opacity=0.6,in=0,out=0},% Linienstil rechtsumschliessende Konstitutionsbeziehung
-  crelationstraight/.style={densely dotted,opacity=0.6}]% Linienstil geradlinige Konstitutionsbeziehung
+  crelationleft/.style={->,densely dotted,opacity=0.6,in=200,out=120},% Linienstil linksumschliessende Konstitutionsbeziehung
+  crelationright/.style={->,densely dotted,opacity=0.6,in=-20,out=60},% Linienstil rechtsumschliessende Konstitutionsbeziehung
+  crelationstraight/.style={->,densely dotted,opacity=0.6}]% Linienstil geradlinige Konstitutionsbeziehung
 % Begin formula from file
 % Platzierung der Nodes
 % Faktoren der Ebene 0:
@@ -53,9 +53,9 @@
 \node[right= \LhDist of A] (C) {C};
 \hilighttarget{C};
 
-% Kausalrelationen
-% auf Ebene 0
-% Formel: D*E <-> F
+% causal relations
+% of level 0
+% formula: D*E <-> F
 % Treffpunkt der Konjunkten
 \node[aux] (Faux) at ([xshift=\LConj]F.west) {};
 % Teilpfeile von den Konjunkten zum Schnittpunkt
@@ -64,7 +64,7 @@
 % Pfeil vom Schnittpunkt zum Zielfaktor
 \draw[->] (Faux) -- (F);
 
-% Formel: G*H <-> I
+% formula: G*H <-> I
 % Treffpunkt der Konjunkten
 \node[aux] (Iaux) at ([xshift=\LConj]I.west) {};
 % Teilpfeile von den Konjunkten zum Schnittpunkt
@@ -73,7 +73,7 @@
 % Pfeil vom Schnittpunkt zum Zielfaktor
 \draw[->] (Iaux) -- (I);
 
-% Formel: F*I <-> J
+% formula: F*I <-> J
 % Treffpunkt der Konjunkten
 \node[aux] (Jaux) at ([xshift=\LConj]J.west) {};
 % Teilpfeile von den Konjunkten zum Schnittpunkt
@@ -82,8 +82,8 @@
 % Pfeil vom Schnittpunkt zum Zielfaktor
 \draw[->] (Jaux) -- (J);
 
-% auf Ebene 1
-% Formel: A*B <-> C
+% of level 1
+% formula: A*B <-> C
 % Treffpunkt der Konjunkten
 \node[aux] (Caux) at ([xshift=\LConj]C.west) {};
 % Teilpfeile von den Konjunkten zum Schnittpunkt
@@ -93,22 +93,22 @@
 \draw[->] (Caux) -- (C);
 
 
-% Konstitutionsbeziehungen
-% Formel: F <-> A
+% constitution relations
+% formula: F <-> A
 \draw[crelationright] (F.north east) to (A.south);
 
-% Formel: D*E <-> A
+% formula: D*E <-> A
 \draw[crelationleft] (D.north west) to (A.south);
 \draw[crelationleft] (E.north west) to (A.south);
 
-% Formel: I <-> B
+% formula: I <-> B
 \draw[crelationright] (I.north east) to (B.south);
 
-% Formel: G*H <-> B
+% formula: G*H <-> B
 \draw[crelationleft] (G.north west) to (B.south);
 \draw[crelationleft] (H.north west) to (B.south);
 
-% Formel: J <-> C
+% formula: J <-> C
 \draw[crelationstraight] (J.north) to (C.south);
 
 

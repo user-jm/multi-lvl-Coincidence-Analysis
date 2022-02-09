@@ -1,3 +1,4 @@
+# Jens' Beispiel
 library(cna)
 
 rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
@@ -73,8 +74,9 @@ sink(file = "r_output.txt") # Ausgabe werden ab hier in Datei gespeichert
 print(cna(data_set, # unserer Datensatz
   rm.dup.factors=FALSE, # verwerfe Spalten mit identischen Eintraegen nicht
   maxstep=c(5,5,10), # maximal 5 Konjunkte, 5 Disjunkte und 10 Faktoren
-  what = "a", # zeige nur atomare Loesungsformeln
+#  what = "a", # zeige nur atomare Loesungsformeln
   details = FALSE,
+  strict = FALSE,
   ordering = list(c("D","E","F","G","H","I","J"),c("A", "B","C"))), # ordering(e_1,e_2,...) setzt e_2 downstream bezueglich e_1, hier werden die Ebenen separiert
   nsolutions = "all") # gib alle Loesungen an
 

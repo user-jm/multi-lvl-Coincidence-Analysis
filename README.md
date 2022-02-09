@@ -1,38 +1,32 @@
-
 # CausalExplanationSimplicity
 
 ## R scripts
 
-enthält einige Beispiele für Multi-Level-Mechanismen für cna
-
-
-## Tex examples
-
-Beispiele wie die Darstellung in Pfaddiagrammen mit pgfplots/TikZ (Latex) aussehen kann
+contains some sample R-scripts that make use of cna, some of them model multi level mechanisms
 
 
 ## cna documentation
 
-Sammlung der cna Dokumentation und Anwendungsbeispiele
+cna documentation file and application examples
 
 
 ## Latex_Template.tex
 
-Template für Umwandlung der R-Ausgabe in automatisch generierte Diagramme
+Template for plotting the obtained mechanisms
 
 
 ## causal_structure_R_data_to_pdf_graph.py
 
-Python-Skript zur automatische Generierung der möglichen Kausal-Diagramme aus der R-Ausgabe
+Python script that generates the possible causal diagramms from the R output
 
-**Dies ist die auszuführende Anwendungsdatei.**
+**This is our main file (to be executed).**
 
 
 ## search_formula.py und tree.py
 
-Python-Module mit zusätzlichen Funktionen
+Python modules with auxiliary functions
 
 
 ## r_output.txt
 
-R-Ausgabe = Python-Eingabe
+R output = Python input

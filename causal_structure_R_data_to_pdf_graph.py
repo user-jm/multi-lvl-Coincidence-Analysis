@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 
-# Datei: causal_structure_R_data_to_pdf_graph.py
+# file: causal_structure_R_data_to_pdf_graph.py
 
-import os                       # operating system interfaces gebraucht um Dateien im eigenen Pfad zu finden
-import codecs                   # zum en- und decodieren von Strings (hier fuer tex-Datei in utf-8)
-import re                       # Regex fuer Suche in Strings
-import jinja2                   # Latex-Schnittstelle
+# proceeds in eight steps
+
+
+import os                       # operating system interfaces is required to find the files of the own path
+import codecs                   # for en- and decoding of strings (esp. to get tex-files in utf-8)
+import re                       # regex for complex search patterns in strings
+import jinja2                   # Latex interface
 from jinja2 import Template
-import itertools                # enthaelt Funktion zum Bestimmen aller Permutationen einer Liste (wird benoetigt fuer
-                                # Minimierung von Kausalrelationen durch Eliminierung redundanter Formeln)
 
-from search_formula import search_formula # eigene Funktion zum Auffinden von aequivalenten logischen Ausdruecken in Formellisten
+from search_formula import search_formula # own function that finds equivalent logical expressions relative to some formulae list
 
-# Syntaxfestlegungen fuer Latex-Ausdruecke
+# syntax definitions for Latex expressions
 latex_jinja_env = jinja2.Environment(
 	block_start_string = '\BLOCK{',
 	block_end_string = '}',
@@ -27,47 +28,50 @@ latex_jinja_env = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.abspath('.')))
 
 
-# erst einmal nur Hilfsfunktionen:
+# auxiliary function:
 def find_causal_factors(st) :
-    # sucht in String st nach durch ", " oder " < " separierten Bezeichnern fuer Kausalfaktoren
-    # gibt die Liste an Kausalfaktoren zurueck
+    # looks in string st for denominators of causal factors, which are separated by ", " or " < "
+    # returns a (possibly empty) list of causal factors
     
-    # loesche "Factors: " aus Textzeile (sofern auftretend)
+    # deletes "Factors: " from line (if it occurs)
     st = st.replace("Factors: ","")
-    # loesche Zeilenendensymbol und ggf. Leerzeichen am Zeilenende
+    
+    # deletes end-of-line-symbol ("\n") and spaces at the end of line of necessary
     st = re.sub("\r?\n","",st).rstrip()
-    # gib Liste der durch ", " oder " < " separierten Eintraege zurueck
+    
+    # returns the list of components of st that were separated by ", " or " < "
     return re.split(",\s*|\s*<\s*", st)
     
     
 def get_equiv_formula(st):
-    # gibt die Teilformeln links und rechts von "<->" in Eingabestring st als Paar von Strings (a,b) zurueck
-    a = re.split(" <-> ",st)[0].strip()          # strip() loescht fuehrende Leerzeichen
+    # returns the leftside and rightside partial formulae of the "alpha <-> beta" from the input string st
+    # as pairs of strings (a,b)
+    a = re.split(" <-> ",st)[0].strip()          # strip() removes leading spaces
     b = re.split(" <-> ",st)[1].strip()
     
-    # Umwandlung der Negationssyntax (in cna durch Minuskel) sodass "a" -> "~A"
-    # 1. Schritt fuege "~" vor jeder Minuskel ein, die
-    # a) am Anfang der Formel steht
-    # b) auf Konjunktor folgt
-    # c) auf Disjunktor folgt
+    # conversion of the negation syntax (in cna by minuscle) such that "a" -> "~A"
+    # 1. step: add "~" before each minuscle, which is either
+    # a) at the beginning of a formula
+    # b) follows a conjunctor
+    # c) follows a disjunctor
     a = re.sub(r'^([a-z])',  r'~\1', a)
-    # Erlaeuterung: "sub" ersetzt Vorkommen eines Minuskels (durch "[a-z]" ausgedrueckt)
-    # durch selbigen mit Praefix "~" versehen
-    # falls Vorkommen an erster Stelle im String (durch "^" festgelegt)
+    # explanation:  "sub" replaces each instance of a minuscle (expressed by "[a-z]")
+    # by itself plus the prefix "~",
+    # if it has been found at the first position of the string (implicated by "^")
 
-    # b) nach "*", dann wird "*~" vor Buchstaben gesetzt
+    # b) if following a "*", the letter will be placed behind "*~"
     a = re.sub(r'\*([a-z])',  r'*~\1', a)
-    # "\*" greift Sternsymbol heraus
+    # The regex expression "\*" picks the star symbol "*" from the string.
 
-    # c) nach " + ", dann wird " + ~" vor Buchstaben gesetzt
+    # c) if following " + ", the letter will be placed behind "+ ~"
     a = re.sub(r'\s\+\s([a-z]+)',  r' + ~\1', a)
-    # "\s" entspricht Leerzeichen, "\+" dem Pluszeichen
+    # in regex "\s" corresponds to spaces, "\+" to "+"
 
-    # 2. Schritt Ersetzung durch Majuskel, sofern Minuskel auf "~" folgt
+    # 2. step replacement of the minuscle that follow to "~" by majuscle
     a = re.sub(r'(~[a-z]+)', lambda pat: pat.group(1).upper(), a)
     
     
-    # in cna-Ausgabe haengen rechts noch weitere Informationen, diese von b abtrennen:
+    # The lines of the cna output contain further stuff, we can get rid off it:
     b = re.split("[ \t]",b)[0]
     return (a,b)
 
@@ -797,12 +801,7 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
                     del level_equiv_list[m][j]  # loescht j-ten Eintrag von level_equiv_list[m]
                 
                 
-        #discard_list = list(set(discard_list)) # loesche Duplikate aus discard_list
-        #for f in discard_list:
-        #    # loesche als redundant markierte Formeln 
-        #    level_equiv_list[m].remove(f)       
-                        
-        #discard_list.clear() 
+        
                             
         print("minimale Kausalrelationen der Konsitutionsebene " + str(m) + ":")
         for formula in level_equiv_list[m] : 
@@ -821,12 +820,14 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
 
 def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list) :
     # Beschreibung folgt
-    
+    ######################################
+    # step 8: preparing the output files #
+    ######################################
     
     tex_code = "% Platzierung der Nodes\n"
     
     ######################################################
-    # Schritt A - Platzierung der Nodes = Kausalfaktoren #
+    # step 8a) - placement of the nodes = causal factors #
     ######################################################
     
     # [Verbesserungsmoeglichkeit 1]
@@ -880,42 +881,41 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
         placement = "[above= {" + str(max_num_factors_order) + "*\LvDist + " + str(max_num_factors_order) + "* \HeightNode  + \iLvDist} of " + level_factor_list_order[m][0][0] + "]"
 
 
-    ############################################################
-    # Schritt B - zeichne Kausal- und Konstitutionsbeziehungen #
-    ############################################################
-    tex_code = tex_code  + "\n% Kausalrelationen\n"
+    ##########################################################
+    # step 8 b) - plot the causal and constitution relations #
+    ##########################################################
+    tex_code = tex_code  + "\n% causal relations\n"
     for m in range(len(level_equiv_list)) : 
-        tex_code = tex_code  + "% auf Ebene "  + str(m) + "\n"
+        tex_code = tex_code  + "% of level "  + str(m) + "\n"
         for formula in level_equiv_list[m] :
-            tex_code = tex_code  + "% Formel: "  + formula[0] + " <-> " + formula[1] + "\n"
+            tex_code = tex_code  + "% formula: "  + formula[0] + " <-> " + formula[1] + "\n"
             tex_code = tex_code + convert_causal_relation(formula, level_factor_list_order, tex_code) + "\n\n"
     
-    tex_code = tex_code  + "\n% Konstitutionsbeziehungen\n"        
+    tex_code = tex_code  + "\n% constitution relations\n"        
     for formula in constitution_relation_list :
-        tex_code = tex_code  + "% Formel: "  + formula[0] + " <-> " + formula[1] + "\n"
+        tex_code = tex_code  + "% formula: "  + formula[0] + " <-> " + formula[1] + "\n"
         tex_code = tex_code + convert_constitution_relation(formula, level_factor_list_order, constitution_relation_list) + "\n"
     
     
     output_file = "output_graph.tex"
-    # Festlegung des Templates (in Latex vorbereitet)
+    # defining the template (already prepared file)
     template = latex_jinja_env.get_template('Latex_Template.tex')
     render = template.render(tex_formula = tex_code)
     
-    # Speichern der generierten tex-Datei
+    # save the generarted string as tex file
     f = open(output_file, 'wb')
     f.write(render.encode('utf-8'))
     f.close()
     
     
-    # diese tex-Datei mit pdflatex kompilieren -- Latexkompiler muss auf dem System
-    # installiert sein
+    # compile this tex file with pdflatex -- requires the Latex compiler to be installed on the executing system
     with codecs.open(str(output_file), "w","utf-8") as letter:
         letter.write(render);
         letter.close();
         os.system("pdflatex -interaction=batchmode " + str(output_file))
-        print('Datei ' + str(output_file[:-4]) + '.pdf ist erstellt.')
+        print('File ' + str(output_file[:-4]) + '.pdf created.')
     
-    # automatisch generierte log-Dateien loeschen
+    # remove automatically generated log files
     os.remove(str(output_file[:-4]+".log"))
     os.remove(str(output_file[:-4]+".aux"))
     
@@ -924,32 +924,32 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
 # Ende print_structure_in_tikz_plot    
                    
 def main() :
-    # Hauptfunktion
+    # main function
     
     
-    level_factor_list = []               # Deklaration der Listen
+    level_factor_list = []               # declaration of the lists
     level_factor_order_list = []
     level_equiv_list = []
     constitution_relation_list = []
     
-    # Schritte 1 - 3 durch Funktion read_R_file -> Umwandlung der cna-Ausgabe in nach Konstitutionslevel sortierte
-    # Listen von Kausalfaktoren (level_factor_list), Kausalrelationen (level_equiv_list) und einer Liste von Konstitutionsbeziehungen
-    # (constitution_relation_list), bei unerwarteten Eintraegen in der cna-Ausgabe erfolgt ein Abbruch (abort == True)
+    # steps 1 - 3 start function read_R_file -> converts cna output into lists that are sorted by constitution level
+    # of causal factors (level_factor_list), causal relations (level_equiv_list) and one list of constitution relations
+    # (constitution_relation_list), if the cna output is not as expeceted stop the procedure with abort = True
     abort, level_factor_list, level_equiv_list, constitution_relation_list = read_R_file("r_output.txt")
     
     if not(abort) :
-        # Schritte 4 und 5 zur Bestimmung der kausalen Ordnung der Faktoren
+        # continue with steps 4 and 5 that determine the causal order of the factors
         abort, unique, level_factor_list_order = determine_factor_order(level_factor_list,level_equiv_list)
         if not(abort) :
             if unique :
-                # falls Kausalordnung fuer alle Faktoren eindeutig bestimmbar ist:
-                # Schritte 6 und 7 Minimierung der Kausal- und Konstitutionsbeziehungen
+                # if the causal order of the factors is uniquely determinable:
+                # steps 6 and 7 minisation of the causal and constitution relations
                 level_equiv_list, constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
-                # graphische Ausgabe als Graph in pdf
+                # step 8: graphical output as a graph in pdf
                 print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list)
                 
             else :
-                print("nicht eindeutig -- hier gehts weiter")                    
+                print("non-unique result")                     #[hierhier]
                 level_equiv_list, constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
           
                     
