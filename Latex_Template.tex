@@ -1,4 +1,4 @@
-\documentclass[11pt,varwidth]{standalone}
+\documentclass[multi=page,crop,11pt,varwidth,border={0pt 2pt 0pt 2pt}]{standalone}% border at bottom and top
 \usepackage{tikz}
 \usetikzlibrary{arrows, fit, positioning, shapes, graphs, quotes, calc}
 
@@ -17,6 +17,11 @@
 \def\LhDist{1.2cm}% horizontal distance between nodes of the same level and subsequent causal orders
 \def\iLvDist{1.4cm}% vertical distance between neighbouring levels
 \def\HeightNode{0.6cm}% hight of nodes
+
+\BLOCK{for index, entry in data}
+\begin{page}
+\centering solution no.~\VAR{index}/\VAR{maxnumber}\\[3mm]
+
 \begin{tikzpicture}[>=latex,%
   every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt},% definition for normal nodes = nodes of causal factors
   aux/.style={circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm},% auxiliary nodes for conjunction junctions
@@ -26,7 +31,10 @@
   crelationright/.style={->,densely dotted,opacity=0.6,in=-20,out=60},% style for the rightside constitution relations
   crelationstraight/.style={->,densely dotted,opacity=0.6}]% style for single constitution relations
 % Begin formula from file
-\VAR{tex_formula}
+\VAR{entry}
 % End formula from file
 \end{tikzpicture}
+\end{page}
+\BLOCK{endfor}
+
 \end{document}
