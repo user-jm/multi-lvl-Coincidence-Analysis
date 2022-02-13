@@ -1,8 +1,19 @@
-\documentclass[multi=page,crop,11pt,varwidth,border={0pt 2pt 0pt 2pt}]{standalone}% border at bottom and top
+\documentclass[multi=page,crop,11pt,varwidth,border=2pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows, fit, positioning, shapes, graphs, quotes, calc}
+\usepackage{graphicx} % for scale box
+\usetikzlibrary{arrows, fit, positioning, shapes, graphs, quotes, calc, bbox}
 
 \begin{document}
+
+\tikzset{every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt}}% definition for normal nodes = nodes of causal factors
+\tikzstyle{aux} = [circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm]% auxiliary nodes for conjunction junctions
+\tikzstyle{neg} = [diamond, draw, minimum size=1mm, text width=1mm]% auxiliary nodes for negations
+\tikzstyle{conjunctonsegment} = [in=170,out=-10]% conjuctive connection lines are curved to easily distinguish them from disjunctions
+\tikzstyle{crelationleft} = [->,densely dotted,gray,in=200,out=120]% style for the leftside constitution relations
+\tikzstyle{crelationright} = [->,densely dotted,gray,in=-20,out=60]% style for the rightside constitution relations
+\tikzstyle{crelationstraight} = [->,densely dotted,gray]% style for single constitution relations
+
+
 \def\hilightsource#1{\draw[densely dashed,-latex] ($(#1)-(8mm,0)$) -> ($(#1)-(3mm,0)$);%
   \fill [green, opacity=.25] (#1) circle [radius=3mm]; }%
 \def\hilighttarget#1{\draw[densely dashed,-latex] ($(#1)+(3mm,0)$) -> ($(#1)+(8mm,0)$);%
@@ -16,24 +27,21 @@
 \def\LvDist{0.8cm}% vertical distance between nodes of the same level and causal order
 \def\LhDist{1.2cm}% horizontal distance between nodes of the same level and subsequent causal orders
 \def\iLvDist{1.4cm}% vertical distance between neighbouring levels
-\def\HeightNode{0.6cm}% hight of nodes
+\def\HeightNode{0.6cm}% height of nodes
+\def\LabelDist{-2mm}% vertical distance of labels from vertices
 
-\BLOCK{for index, entry in data}
+\BLOCK{for index, entry, subtitle in data}
 \begin{page}
 \centering solution no.~\VAR{index}/\VAR{maxnumber}\\[3mm]
 
 \begin{tikzpicture}[>=latex,%
-  every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt},% definition for normal nodes = nodes of causal factors
-  aux/.style={circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm},% auxiliary nodes for conjunction junctions
-  neg/.style={diamond, draw, minimum size=1mm, text width=1mm},% auxiliary nodes for negations
-  conjunctonsegment/.style={in=170,out=-10},% conjuctive connection lines are curved to easily distinguish them from disjunctions
-  crelationleft/.style={->,densely dotted,opacity=0.6,in=200,out=120},% style for the leftside constitution relations
-  crelationright/.style={->,densely dotted,opacity=0.6,in=-20,out=60},% style for the rightside constitution relations
-  crelationstraight/.style={->,densely dotted,opacity=0.6}]% style for single constitution relations
+  %bezier bounding box=true,% avoid excessive white spaces around bended lines [comment this line out if compiling takes too long]  
+  ]%
 % Begin formula from file
 \VAR{entry}
 % End formula from file
-\end{tikzpicture}
+\end{tikzpicture}\\[4mm]
+\tiny $\VAR{subtitle}$
 \end{page}
 \BLOCK{endfor}
 

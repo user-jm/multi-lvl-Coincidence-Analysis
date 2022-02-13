@@ -2,7 +2,28 @@
 
 # file: causal_structure_R_data_to_pdf_graph.py
 
-# proceeds in eight steps
+# This script reads the output of a Coincidence Analysis (CNA) of some given truth table of a tiered list
+# of causal factors and attempts to generate causal graphs for each unique solution. These are finally exported
+# into a graph in Latex TikZ-code. It assumes that the causal factors pertain to different levels, which are separated
+# by the cna causal ordering relation "<". Relations between factors of different levels are not considered as causal
+# but constitution relations. Accordingly the script separates causal and constitution relations in the complex solution
+# formulae of cna.
+
+# It proceeds in eight steps:
+# step 1: generates a list of the causal factors that appear in the cna-generated solutions (part of the function read_R_file)
+# step 2: identifies the equivalence formulae in the cna-output (part of the function read_R_file)
+# step 3: categorises the formulae into constitution relations and causal relations of different levels,
+# already discards all formulae that do not fit in any of these categories (part of the function read_R_file)
+# step 4: sorts out those cna-generated solutions that make no sense given the imposed level hierarchy (function cull_complex_solutions)
+# step 5: identifies the incoming factors of each level - those that are not equivalent to complex expressions of other factors
+# (part of the function determine_factor_order)
+# step 6: defines the causal order on each level iteratively, starting with incoming factors a total causal order is imposed
+# (part of the function determine_factor_order)
+# step 7: minimises the constitution relations, while the causal relations are obtained from cna's complex solution formulae,
+# the constitution relations are generated from its atomic solution formulae, there still many to be sorted out, since all
+# possible equivalences are listed (function find_structure)
+# step 8: translates the obtained structures into a graphical output via Latex
+
 
 
 import os                       # operating system interfaces is required to find the files of the own path
@@ -10,8 +31,6 @@ import codecs                   # for en- and decoding of strings (esp. to get t
 import re                       # regex for complex search patterns in strings
 import jinja2                   # Latex interface
 from jinja2 import Template
-
-from search_formula import search_formula # own function that finds equivalent logical expressions relative to some formulae list
 
 # syntax definitions for Latex expressions
 latex_jinja_env = jinja2.Environment(
@@ -165,7 +184,7 @@ def get_formula_level(st, level_factor_list):
 
 def get_factor_order(factor, factor_list):
     # determines the order of a causal factor relative to a factor list of the form
-    # list[LEVEL][ORDER][FACTORS], if factor is contained in FACTORS, return the corresponding value of ORDER
+    # list[LEVEL][ORDER][FACTORS], if factor is contained in FACTORS, return the corresponding value of ORDER in the respective level
     # otherwise return -1
     order = -1
     for m in range(len(factor_list)):
@@ -194,6 +213,9 @@ def get_formula_order(formula, factor_list):
 
 
 def create_term_list(solution_list) :
+    # for a given list of formulae, this function splits conjunctions into a nested list of conjuncts for each formula
+    # expected form of the elements of the input list is: "(...)*(...)* .... *(...)"
+    
     solution_term_list = []
     
     for i in range(len(solution_list)) :        # for each solution from cna
@@ -217,6 +239,25 @@ def create_term_list(solution_list) :
             
     return solution_term_list
 
+
+def get_causal_prefactors(factor, formula_list, factor_list) :
+    # returns a list of direct and indirect causal prefactors of a given factor relative to a list of causal relations
+    
+    return_list = []
+    
+    for formula in formula_list :
+        if formula[1] == factor :
+            # if the factor we are interested in is the target factor of the relation formula,            
+            # then add all factors that appear on the left side of formula to the return list
+            return_list.extend(get_components_from_formula(formula[0], factor_list))
+            
+            for pfac in get_components_from_formula(formula[0], factor_list) :
+                # get the indirect prefactors recursively
+                return_list.extend(get_causal_prefactors(pfac, formula_list, factor_list))
+    
+    return_list = list(set(return_list))  # get rid of duplicates
+    return return_list
+
 def convert_causal_relation(formula, level_factor_list_order, tex_code) :
     # translates a formula of causal relations into TikZ-Latex code
     # returns the code as string
@@ -227,8 +268,9 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
     # determine the syntactic type of formula #
     ###########################################
     # assumption: the cna output contains only the following types of formula:
-    # 1) equivalence between causal factors (A <-> B) or non-equivalence between causal factors (~A <-> B)
-    # 2) equivalence of one causal factor with conjunctions of factors ( A*B* ... <-> E)
+    # 1) equivalence between causal factors (A <-> B) 
+    # 2) non-equivalence between causal factors (~A <-> B)
+    # 3) equivalence of one causal factor with conjunctions of factors ( A*B* ... <-> E)
     # 4) equivalence of one causal factor with conjunctions of factors and negated factors ( A*~B* ... <-> E)
     # 5) equivalence of one causal factor with disjunctions of factors ( A + B + ... <-> E)
     # 6) equivalence of one causal factor with disjunctions of factors and negated factors ( A + ~B + ... <-> E)
@@ -259,13 +301,23 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
             # disjunctions #
             ################
             
-            disjunctor_list = re.split("\s*\+\s*", formula[0])  # list of the possibly complex disjuncts of formula
+            # create a list of the possibly complex disjuncts of formula
+            disjunctor_list = re.split("\s*\+\s*", formula[0])  
+            
             
             for disj in disjunctor_list : 
+                # running through this list
+                # each disjunct is tested whether it is
+                # A) a simple causal factor
+                # B) a conjunction
+                # C) a negated causal factor
+                # each case is treated separately
 
                 
                 if disj in get_components_from_formula(formula[0], level_factor_list_order) :
                     # case A: the discunct is one causal factor
+                    
+                    # a straight arrow is drawn from source factor to target factor
                     st = st + "% simple disjunction\n"
                     st = st + "\draw[->] (" + disj + ".east) to (" + formula[1] + ".west);\n"
                 
@@ -273,9 +325,13 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     # case B: the disjunct is a conjunction
                     st = st + "% complex disjunction\n"
                     
+                    # first, the conjuncts are connected by curved lines meeting in one junction point
+                    # placed one right (with a slight upward shift) to factor of the highest causal order
+                    # second, this junction point is connected with the target factor by a straight arrow like
+                    # in case A)
                     conjunctor_list = re.split("\*", disj)
                     
-                    # first set the junction of the conjuncts
+                    # set the junction of the conjuncts
                     # place it beside the (first) conjunct of the highest causal order (the factor that is most to the right in the graph)
                     # find the corresponding node of that conjunct -- f_fac
                     cross_point = ""                    # name of node of the junction of the conjunctions
@@ -289,10 +345,13 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     
                     cross_point = cross_point + formula[1]
                     position = "at ([xshift=\hDisjConj, yshift=\\vDisjConj]" + f_fac + ".east)"
+                    
                     # Attention: It might happen that several disjuncts of conjuncts meet at the same factor f_fac,
                     # therefore we have to check whether the position of the junction node has to be shifted.
                     q = 1
-                    while (tex_code.find(position) > -1) or (st.find(position) > -1) :
+                    while (tex_code.find(position) > -1) or (st.find(position) > -1) :  
+                        # this position has already been specified in earlier vertices (tex_code) or this one
+                        # -> shift it above by \tDisjConj
                         position = "at ([xshift=\hDisjConj, yshift={\\vDisjConj + " + str(q) + "*\\tDisjConj}]" + f_fac + ".east)"
                         q = q + 1
                         
@@ -321,10 +380,17 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                             print("The disjunction " + formula[0] + "  could not be plotted because its substructure was not recognized(1).")
 
                     # connect the junction with the target factor
-                    st = st + "% arrow from junction to target factor\n\draw[->] (" + cross_point + "aux) -- (" + formula[1] + ".west);\n"
+                    
+                    # experimental label above the connection for very convoluted graphs
+                    st_conj = "$"
+                    for conj in conjunctor_list :
+                        st_conj = st_conj + conj + "\cdot"
+                        
+                    st_conj = st_conj[:-5] + "$"
+                    
+                    st = st + "% arrow from junction to target factor\n\draw[->] (" + cross_point + "aux) -- (" + formula[1] + ".west) node[draw=none,fill=none,font=\\tiny,pos=0,above=\LabelDist,sloped] {\scalebox{.3}{" + st_conj + "}};\n"
                 
                 elif (disj[0] == "~") and (disj[1:] in get_components_from_formula(formula[0], level_factor_list_order)) :
-                    
                     # case C: the disjunction is a negated factor
                     # = the first character is "~" and the further characters correspond to one element from level_factor_list_order
                     
@@ -349,6 +415,9 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
             # conjunctions #
             ################
             
+            # procedure is the same as conjuncts in disjunctions
+            # the only difference is that we here do not deal with a subformula of formula[0], but the whole
+            
             # place junction of the conjuncts
             st = "% junction of the conjuncts\n\\node[aux] (" + formula[1] + "aux) at ([xshift=\LConj]" + formula[1] + ".west) {};\n% partial arrows from the conjuncts to the junction\n"
             
@@ -369,9 +438,12 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     st = st + "\draw[conjunctonsegment] (" + conj + ") to (" + formula[1] + "aux);\n"
             
             # draw arrow from junction to target factor
-            st = st + "% arrow from junction to target factor\n\draw[->] (" + formula[1] + "aux) -- (" + formula[1] + ");"
-        else :
+            # experimental with tiny label above vertex
+            st = st + "% arrow from junction to target factor\n\draw[->] (" + formula[1] + "aux) -- (" + formula[1] + ") node[draw=none,fill=none,font=\\tiny,above=\LabelDist,pos=0,sloped] {\scalebox{.3}{$" + formula[0].replace("*", "\cdot ") + "$}};\n"
             
+        else :
+            # this should never happen
+                        
             ##############################
             # structure not recognisable #
             ##############################
@@ -403,6 +475,7 @@ def convert_constitution_relation(formula, level_factor_list_order, constitution
                 c_right = True
     
     # draw one connecting line toward formula[1] for each causal factor in formula[0]
+    # (usually there should only be one factor in formula[0])
     for fac in get_components_from_formula(formula[0], level_factor_list_order) :           
         if c_left and not(c_right) :
             # case 1: leftside relation
@@ -556,8 +629,8 @@ def read_R_file(file_name):
                     level_equiv_list[get_formula_level(formula[1], level_factor_list)].append(formula)
                     
                 elif get_formula_level(formula[0], level_factor_list) > -1 :
-                    # alle Formeln, bei denen rechts ein Element aus einer anderen Ebene mit Elementen links (alle aus gleicher Ebene)
-                    # verbunden wird, werde zu constitution_relation_list hinzugefuegt
+                    # all formulae, which relate the element on the right side with factors of one different level on the left side
+                    # are added to constitution_relation_list
                     # assumption: only constitution relations with level difference of one are maintained
                     
                     if get_formula_level(formula[0], level_factor_list) == get_formula_level(formula[1], level_factor_list) - 1 :
@@ -569,7 +642,16 @@ def read_R_file(file_name):
     
 
 def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, constitution_relation_list) :
-    # description to follow
+    # This functions rejects cna-solutions that do not meet the specifities of multi-level structures.
+    # It returns a reduced list of elements from solution_list that 
+    # A) contain formulae which exihibit a mixture of causal factors from different levels within one disjunction or conjunction
+    # B) are incomplete after constitution relations have been separated -- some causal factors are then absent in some solutions
+    # C) are duplicates of other solutions (originally they might have differed in terms that are constitution relations)
+    # It constitutes the fourth step of the overall procedure.
+    
+    ##########################################################################
+    # step 4: single out valid and unique solutions for the causal structure #
+    ##########################################################################
     
     solution_term_list = [] # elements of solution_list are conjunctions of equivalences, these will be separated and added to this list
     
@@ -577,7 +659,7 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
     solution_term_list = create_term_list(solution_list)        
             
     #####################################
-    # step A: discard invalid solutions #
+    # step 4A: discard invalid solutions #
     #####################################
     
     # sorting out solutions that mix causal factors from different levels on the left side of an equivalence
@@ -604,7 +686,7 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
     print("Number of solutions after sorting out invalid terms " + str(len(solution_list)))
     
     ##############################################
-    # step B: remove incomplete causal relations #
+    # step 4B: remove incomplete causal relations #
     ##############################################
     
     # Since cna does not distinguish between causal and constitution relations, we might end up with solutions in which
@@ -639,7 +721,7 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
             del solution_list[i]      # since the for-loop is regressive list elements can safely be deleted
             del solution_term_list[i]  
         
-    print("Number of solutions after sorting out constitution relations " + str(len(solution_list)))
+    print("Number of solutions after sorting out causally incomplete structures " + str(len(solution_list)))
     
     # reconstruct solution_list without constitution relations
     new_solution_list = []
@@ -651,6 +733,10 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
             
         # removing the surplus "*(" at the end of st
         st = st[:-2]
+        
+        #################################
+        # step 4C: discarding duplicates #
+        #################################
         
         if not(st in new_solution_list) : # checking for duplicates
             new_solution_list.append(st)
@@ -677,7 +763,7 @@ def determine_factor_order(level_factor_list,level_equiv_list) :
     for m in range(level_count):
                 
         ##########################################
-        # step 4: determine the incoming factors #
+        # step 5: determine the incoming factors #
         ##########################################
                 
                 
@@ -723,81 +809,123 @@ def determine_factor_order(level_factor_list,level_equiv_list) :
            
                 
         else:
+            # level_factor_list_order[m][0] is not empty
                         
                 
             ###########################################
-            # step 5: define causal order iteratively #
+            # step 6: define causal order iteratively #
             ###########################################
                     
-            # dazu zunaechst Zerlegung von level_factor_list in Faktoren, die nur rechts in den verbleibenden
-            # Formeln stehen -> downstream_factor_list
+            # create a total ordering of all causal factors of one level into their causal order
+            # this is done iteratively starting with the yet obtained order zero by categorising all further factors
+            
+            # create a list of all yet non-categorised factors (= those that are causally down_stream to the considered factors)
             downstream_factor_list = []
                 
-            # downstream_factor_list besteht zunaechst aus den Elementen von level_factor_list[m], die nicht
-            # in von Ordnung 0 sind
+            # initially downstream_factor_list consists of those elements of level_factor_list[m], that are not of order 0
             for element in level_factor_list[m]:
                 if not (element in level_factor_list_order[m][0]):
                     downstream_factor_list.append(element)
                         
            
                     
-            # jetzt wird level_factor_list_order[m] sukzessiv ergaenzt um Faktoren, die 
-            # nur von Faktoren abhaengen, die bereits in level_factor_list_order[m] stehen
-            # dazu wird downstream_factor_list von hinten durchgegangen
-            for j in range(len(downstream_factor_list)-1,-1,-1) :
-                stop = False
-                k = 0
-                candidate = False
-                # k verweist auf den aktuellen Kandidaten aus downstream_factor_list
-                while not(candidate) and k < len(downstream_factor_list):
-                    i = 0
-                    candidate = True
-                    order = 0           # Ordnung des betrachteten Faktors
+            # successively add to the list level_factor_list_order[m] those factors which appear on the right side of causal relation
+            # whose left side factors are all already contained in level_factor_list_order[m]
+            # this is done by four nested lists:
+            # 1) a while loop that runs over the indexes of the elements of downstream_factor_list
+            # it may have to pass the same element multiple times since it might be necessary that other factors are to
+            # be classified first
+            # 2) a for loop over all causal equivalence formulae
+            # checks whether in all formulae where the considered element stands on the right side (as a singular term)
+            # all terms on the left side have an order assigned, therefore a third loop has to been run over
+            # 3) a for loop over the causal factors that appear on the left side of the current formula
+            # 4) a for loop over all orders in level_factor_list_order to check whether the elements from 3) are already contained
+            # in one sublist
 
-                    # es werden alle Formeln dieser Ebene durchsucht, wobei
-                    # i auf aktuelle Formel verweist
-                    while candidate and i < len(level_equiv_list[m]):
-                        # steht der aktuelle Kandidat rechts in der Formel?
-                        if downstream_factor_list[k] == level_equiv_list[m][i][1]:
-                            # dann wird geprueft ob alle Faktoren links Elemente von 
-                            # level_factor_list_order[m] sind, dabei:
-                            # level_equiv_list[m][i][0] -> m = Level der Formel
-                            # i = Nummer des Eintrags, 0 = linke Seite der Formel
-                            for element in get_components_from_formula(level_equiv_list[m][i][0], level_factor_list):
-                                candidate = False
-                                for o in range(len(level_factor_list_order[m])):     # o laeuft ueber die Anzahl der Ordnungen
-                                    # in level_factor_list_order
-                                    if ( element in level_factor_list_order[m][o]):
-                                        candidate = True
-                                        if order < o + 1:
-                                            order = o + 1
-                                
-                        i = i + 1
-                                
-                    k = k + 1
-                if len(level_factor_list_order[m]) == order :
-                    level_factor_list_order[m].append([])  # neue Ordnung zur Liste hinzufuegen
+            # traverse downstream_factor_list regressively (loop 1)
+            j = len(downstream_factor_list) - 1
+            while j > -1 :
+                classifiable = False    # Boolean value whether a causal order can be assigned to downstream_factor_list[j] given
+                # the current level_factor_list_order
+                order = 0               # the order that will be given to downstream_factor_list[j]
+                
+                # loop 2 - for loop over all causal formulae
+                for formula in level_equiv_list[m] :
+                    if formula[1] == downstream_factor_list[j] :
+                        # go through all formulae where element j is the right side term
+                        # then check whether in all of these formulae every factor on the left side has already an order assigned
+                        # if so, element j gets the max order + 1
+                        # if not, continue with the next element of downstream_factor_list
+                        
+                        order = 0 # order has to be reset to zero
+                        
+                        # loop 3 - for loop over all factors on the left side of formula
+                        for fac in get_components_from_formula(formula[0], level_factor_list) :
+                            fac_is_listed = False      # is there already an order assigned to the currently considered factor fac?
                             
-                # falls in allen Formeln des Levels, alle Faktoren auf der linken Seite
-                # level_factor_list_order[m] sind, wird downstream_factor_list[k-1] in einen solchen
-                # umgewandelt mit der entsprechenden Ordnung (k-1, weil zwischenzeitlich k um eins erhoeht wurde)    
-                if candidate :
-                    level_factor_list_order[m][order].append(downstream_factor_list[k-1])                    
+                            # loop 4 - for loop over all orders
+                            for o in range(len(level_factor_list_order[m])) :
+                                if fac in level_factor_list_order[m][o] :
+                                    fac_is_listed = True
+                                    if order < o + 1 :
+                                        order = o + 1  # the order of downstream_factor_list[j] is at least one higher than that of fac
+                                        
+                                    break              # break from loop over orders, if fac has already been found
+                            # end of loop 4 over orders        
                             
-                    del downstream_factor_list[k-1]
-                else:
-                    stop = True
+                            if not(fac_is_listed) :
+                                classifiable = False   # if one source factor has no assigned order, the target factor is not (yet)
+                                # classifiable
+                                break                  # break from loop over factors, since one non-categorised factor suffices
+                                
+                            else :
+                                classifiable = True    # an order can be assigned to target factor j (given the current information)
+                                
+                        # end of loop 3 over factors of formula[0]
+                        
+                        if not(classifiable) :
+                            break                      # break from loop over formulae after one has been found that turns out that
+                            # factor j is unclassifiable by now
+                            
+                # end of loop 2 over all causal relations
+                
+                if classifiable :
+                    if len(level_factor_list_order[m]) < order :
+                        # the determined order of j is by at least 2 higher than that of the highest elements of the current list
+                        # this should never happen - and possibly can't
+                        print("Error in determining the order of the causal factors")
+                        abort = True
+                        break                          # break from while loop, something went wrong with level_factor_list_order
+                    else :
+                        if len(level_factor_list_order[m]) == order :
+                            # factor j is the first one of its order
+                            # a new sublist is to be created
+                            level_factor_list_order[m].append([])
+                        
+                        # j to the ordered factor list    
+                        level_factor_list_order[m][order].append(downstream_factor_list[j])     
+                        
+                        # and delete it from the unordered one
+                        del downstream_factor_list[j]
+                        
+                        # proceed with the last element of downstream_factor_list
+                        j = len(downstream_factor_list) - 1
+                            
+                else :
+                    j = j - 1                          # proceed with the next factor in downstream_factor_list
+                        
+            # end of loop 1 over the elements of downstream_factor_list
             
             # output as console text     
-            print("causal factors of level " + str(m) + " with their causal order:")
-            for p in range(len(level_factor_list_order[m])):
-                print("order " + str(p))
-                print(level_factor_list_order[m][p])
+            #print("causal factors of level " + str(m) + " with their causal order:")
+            #for p in range(len(level_factor_list_order[m])):
+            #    print("order " + str(p))
+            #     print(level_factor_list_order[m][p])
             
                        
             if downstream_factor_list:
-                # falls downstream_factor_list nicht leer ist, ist Kausalstruktur nicht eindeutig
-                print("No unique structure")
+                # if downstream_factor_list is not empty, the causal structure is not unique
+                # There are some causal factors that cannot be categorised into level_factor_list_order.
                 unique = False
                
     return abort, unique, level_factor_list_order
@@ -808,167 +936,157 @@ def determine_factor_order(level_factor_list,level_equiv_list) :
     
     
 def find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list) :
-    # bestimmt Kausal- und Konstitutionsstruktur aus den eingegebenen Listen von Kausalfaktoren, Kausalrelationen und 
-    # Konstitutionsbeziehungen
-    # Ausgabe erfolgt in Form von (moeglichst) minimalen Kausal- und Konstitutionsrelationen
+    # this functions is intended to minimise constitution_relation_list and to
+    # return the minimal list of constitution relations
+    
+    # In most cases constitution_relation_list contains many relations that should not be plotted. 
+    # These are either wrong, since they include the causal preconditions of a complex that constitutes a higher level factor,
+    # or dispensable, since the are middle terms of the complex.
+    # e.g. if a lower level causal structure (A*B -> C) * (D*E -> F) * (C*F -> G) constitutes F1 on an upper level,
+    # we only want the connectives A <-> F1, B <-> F1, D <-> F1, E <-> F1 and G <-> F1,
+    # also relations between F1 and further preconditions of A,B,D,E should be discarded
+    
+    ################################################################
+    # step 7: discard wrong and dispensable constitution realtions #
+    ################################################################
+    
     
     level_count = len(level_factor_list_order)
+    new_constitution_list = []
+    return_list = []  
     
-    for m in range(level_count) :
-        #########################################################
-        # Schritt 6: falsche Konstitutionsbeziehungen verwerfen #
-        #########################################################
-        # vor den Kausalrelationen durchfuehren um volle Zahl (auch redundante) an Aequivalenzformeln
-        # fuer Umformungen nutzen zu koennen
+    for m in range(1,level_count) :
+        # start at level one, since the first level (not the zeroth) is the first one that might have constitution relations 
+        
+        for o in range(len(level_factor_list_order[m])) :
+            # loop over all causal orders of level m
+
+            for fac in level_factor_list_order[m][o] :
+                # loop over all factors of order o and level m
+                
+                # create an auxiliary list of constitution relations with respect to fac
+                auxiliary_list = []
+                for c in constitution_relation_list :
+                    # loop over all constitution relations
+                    if c[1] == fac :
+                        for l_fac in get_components_from_formula(c[0], level_factor_list_order) :
+                            if not(l_fac in auxiliary_list) :
+                                # add the factors on the left side of c to the auxiliary list if fac stands on its right side
+                                auxiliary_list.append(l_fac) 
                     
-        if m > 0 :
-            # erst ab 1. Level gibt es Konstitutionsbeziehungen
-            for o in range(len(level_factor_list_order[m])) :
-                for fac in level_factor_list_order[m][o] :
-                    # zaehle Konstitutionsformeln, die fac mit unterer Ebene verbinden
-                    # bei mehr als zwei (eine fuer incomming, andere outgoing), muessen falsche Formeln
-                    # geloescht werden
-                    auxiliary_list = [] # Hilfsliste fuer Konstitutionsbeziehungen bzgl. fac
-                    for c in constitution_relation_list :
-                        if c[1] == fac :
-                            auxiliary_list.append(c)
-                            
-                    if len(auxiliary_list) < 1 :
-                        # Meldung das weniger Konstitutionsbeziehungen als erwartet gefunden worden sind
-                        print("Für " + fac + " wurden nur " + str(len(auxiliary_list)) + " Konstitutionsbeziehungen gefunden.")
-                                
-                    elif len(auxiliary_list) > 2 :
-                        # loesche ueberzaehlige Konstitutionsbeziehungen
-                        discard_list = [] # Liste der zu verwerfenden Formeln
-                                
-                        if o == 0 :
-                            # wenn Ordnung des betrachteten Faktors = 0, dann koennen falsche Formeln nur aus Zwischenfaktoren
-                            # bestehen, d.h. incomming Beziehung muss aus Faktoren der Ordnung 0 (bzgl. der unteren Ebene) bestehen,
-                            # outgoing Beziehung besteht aus Faktor hoechster Ordnung (bzgl. der unteren Ebene)
-                            max_order = 0
-                            for ac in auxiliary_list :
-                                if get_formula_order(ac[0], level_factor_list_order) > max_order :
-                                    max_order = get_formula_order(ac[0], level_factor_list_order)
+            
+                if len(auxiliary_list) > 2 :
+                    # further steps are only necessary if auxiliary_list contains more than two entries
+                    # 1) find the highest order -> factors of this order a kept for sure
+                    # 2) determine the lowest order that should be kept
+                    # a) if fac is of order 0 (on level m), factors of downto order 0 (on level m-1) should be kept
+                    # b) if fac is of a higher order, its lowest factors must not be in constitution relation
+                    # with fac's causal pre-factors
+                    
+                    max_order = 0
+                    
+                    # determine the value of max_order
+                    for l_fac in auxiliary_list :
+                        if get_factor_order(l_fac, level_factor_list_order) > max_order :
+                            max_order = get_factor_order(l_fac, level_factor_list_order)
 
-                            # alle Formeln zwischen Ordnung = 0 und max_order koennen verworfen werden
-                            for ac in auxiliary_list :
-                                if (get_formula_order(ac[0], level_factor_list_order) < max_order) and (get_formula_order(ac[0], level_factor_list_order) > 0) :   
-                                    discard_list.append(ac)
-                                            
-                            # pruefen, ob es nun nur noch zwei uebrige Formeln sind
-                            if len(auxiliary_list) - len(discard_list) == 2 :
-                                # falls ja, loesche Elemente von discard_list aus constitution_relation_list
-                                for e in discard_list :
-                                    constitution_relation_list.remove(e)
-                                            
-                            elif len(auxiliary_list) - len(discard_list) < 2 :
-                                print("Für den Faktor " + fac + " gibt es zu wenig Konstitutionsbeziehungen.")
-                                # !!! Was tun ? !!!
-                                        
-                            elif len(auxiliary_list) - len(discard_list) > 2 :
-                                # loesche zunaechst klar falsche Formeln
-                                for e in discard_list :
-                                    constitution_relation_list.remove(e)
-                                # Meldung dass immer noch zu viele Formeln vorliegen
-                                print("Für den Faktor " + fac + " gibt es zu viele Konstitutionsbeziehungen.")
-                                # !!! Was tun ? !!!
-                                        
-                        else : # Term der hoeheren Ebene ist von groesserer Kausalordnung als 0
+                            
+                    if o > 0 :
+                        # if the considered factor fac on the higher level is not an incomming factor, check whether its alleged
+                        # constitution factors already constitute a causally upstream factor on fac's level 
+                        # -> if it has been found remove it from the prospective list for fac
                         
-                            sec_auxiliary_list = [] # zweite Hilfsliste, hier werden alle bekannten "Uebersetzungen" von
-                            # Faktoren der Ebene m durch ihre Konstituenten der Ebene m-1 eingetragen
-                            
-                                        
-                            for j in level_equiv_list[m] :
-                                if j[1] == fac :                                                
-                                    # suche unter den Aequivalenzen der Ebene m nach solchen, die fac kausal aufloesen
-                                    for k in get_components_from_formula(j[0],level_factor_list_order[m]) :
-                                        # fuer jeden kausalen Faktor bzgl. fac pruefe, sammle dessen Konstitutionsbeziehungen
-                                        # in sec_auxiliary_list
-                                        for c in constitution_relation_list :
-                                            if c[1] == k :
-                                                sec_auxiliary_list.append(c)
-                                                            
-                                                            
-                                                            
-                                                           
+                        # a list of all direct and indirect causal prefactors of fac
+                        prefactor_list = get_causal_prefactors(fac, level_equiv_list[m], level_factor_list_order[m])
+                        
+                        for l in range(len(auxiliary_list) - 1, -1, -1) :
+                            for pfac in prefactor_list :
+                                pair = (auxiliary_list[l], pfac)
+                                if pair in new_constitution_list :
+                                    del auxiliary_list[l]
+                                    break   # break from loop over prefactors, since we are done with this element fron auxiliary list
+                                                   
+                    # otherwise if the considered factor on the higher level is an incomming factor, do not restrict the lowest order
+                    # of factors from auxiliary_list                         
 
-                            sec_auxiliary_list.extend(auxiliary_list) # alle Listen werden fuer search_formula benoetigt
-                            sec_auxiliary_list.extend(level_equiv_list[m]) # dort werden sie zum Teil wieder separiert
-                            
-                            for ac in auxiliary_list :
-                                if search_formula(ac, sec_auxiliary_list) :
-                                    print("redundant:")
-                                    print(ac)
-                                    discard_list.append(ac)
-                                else : #hierhier
-                                    print("NICHT redundant")
-                                    print(ac)
-                             
-                                    
-                            # loesche Duplikate    
-                            discard_list = list(dict.fromkeys(discard_list))
-                                        
-                            # pruefen, ob es nun nur noch zwei uebrige Formeln sind
-                            if (len(auxiliary_list) - len(discard_list)) == 2 :
-                                # falls ja, loesche Elemente von discard_list aus constitution_relation_list
-                                    for e in discard_list :
-                                        constitution_relation_list.remove(e)
-                            elif (len(auxiliary_list) - len(discard_list)) == 1 :
-                                for e in discard_list :
-                                    constitution_relation_list.remove(e)
-                                    # !!! Ist das so erwuenscht ? !!!
-                                                
-                            elif (len(auxiliary_list) - len(discard_list)) < 1 :
-                                print("Für den Faktor " + fac + " gibt es zu wenig Konstitutionsbeziehungen.")
-                                # !!! Was tun ? !!!
-                                        
-                            elif (len(auxiliary_list) - len(discard_list)) > 2 :
-                                # loesche zunaechst klar falsche Formeln
-                                for e in discard_list :
-                                    constitution_relation_list.remove(e)
+                # carry over the entries from auxiliary_list into new_constitution_list    
+                for lfac in auxiliary_list :
+                    entry = (lfac, fac)
+                    if not(entry in new_constitution_list) :
+                        new_constitution_list.append(entry) 
+                
+                # clear the auxiliary list    
+                auxiliary_list.clear()                    
+                    
+                    
+        # now discard constitution relations to terms that are middle terms of causal chains whose
+        # upstream and downstream factors are also in a constitution relation with the considered higher level factor
+        
+        # completely new loops are necessary in order to make the first one run with correct results
+        # (some relations that will be discarded now, are necessary before in order to test whether some constitution relations
+        # overlap with those of causal pre-factors
+        
+        for o in range(len(level_factor_list_order[m])) :
+            # loop over all causal orders of level m
 
-                                # Meldung dass immer noch zu viele Formeln vorliegen
-                                print("Für den Faktor " + fac + " gibt es zu viele Konstitutionsbeziehungen.")
+            for fac in level_factor_list_order[m][o] :
+                # loop over all factors of order o and level m
+                
+                # create a new auxiliary list of constitution relations with respect to fac
+                auxiliary_list = []
                                     
-                            sec_auxiliary_list.clear()
-                                        
-                                    
-                                        
-                                    
-                        discard_list.clear()
+                for entry in new_constitution_list :
+                    # obtain the results from the loop above
+                    if entry[1] == fac :
+                        auxiliary_list.append(entry[0])
+                    
+                if len(auxiliary_list) > 2 :
+                    for l in range(len(auxiliary_list) - 1, -1, -1) :
+                        
+                        # get the level of auxiliary_list[l]
+                        level = 0
+                        for lvl in range(len(level_factor_list_order)) :
+                            if any(auxiliary_list[l] in o for o in level_factor_list_order[lvl]) :
+                                # in this if-clause we check whether auxiliary_list[l] is element in any sublist of
+                                # level_factor_list_order[lvl] (the sublists are the order lists, which contain the causal factors)
                                 
-                          
-                                
-                                
+                                level = lvl
+                                break          # break from the lvl loop, after it has been obtained
+
+                        if get_causal_prefactors(auxiliary_list[l], level_equiv_list[lvl], auxiliary_list) :
+                            # if factor l has causal prefactors within auxiliary_list
+                            
+                            # and if it is also a causal prefactor of another element in auxiliary list,
+                            # it should be removed
+                            for lfac in auxiliary_list :
+                                if auxiliary_list[l] in get_causal_prefactors(lfac, level_equiv_list[lvl], auxiliary_list) :
+                                    del auxiliary_list[l]
+                                    break      # break from loop over the elements of auxiliary_list
+                            
+
+                # carry over the entries from auxiliary_list into return_list    
+                for lfac in auxiliary_list :
+                    entry = (lfac, fac)
+                    if not(entry in return_list) :
+                        return_list.append(entry) 
+                
+                # clear the auxiliary list    
                 auxiliary_list.clear()
                                 
                                 
                 
-                    
-        #################################################
-        # Schritt 7: redundante Kausalformeln streichen #
-        #################################################
-        
-        # ist raus!!            
-                            
-        print("minimale Kausalrelationen der Konsitutionsebene " + str(m) + ":")
-        for formula in level_equiv_list[m] : 
-            print(formula[0] + " -> " + formula[1])
-                        
-    
-    # Schleife ueber Konstitutionsebenen endet hier
-                
-    print("Liste der minimalen Konstitutionsbeziehungen:")
-    for c in constitution_relation_list :
-        print(c[0] + " -- " + c[1]) 
+    #print("minimal list of constitution relations:")
+    #for c in constitution_relation_list :
+    #    print(c[0] + " -- " + c[1]) 
       
-    return level_equiv_list, constitution_relation_list
-# Ende find_structure                   
+    return return_list
+# end of find_structure                   
 
 
 def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list) :
-    # description to follow
+    # Prepares the TikZ code for plotting one solution
+    # a) places the causal factors as nodes separated by causal order (horizontally) and constitution level (vertically)
+    # b) adds the causal and constitution relations as vertices between nodes
     
     ######################################
     # step 8: preparing the output files #
@@ -1005,11 +1123,13 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
                 
                 # add a line to tex_code in which the node is placed, its name is the same as the one of the causal factor
                 # and it is displayed on a label
-                tex_code = tex_code + "\\node" + placement + " (" + e + ") {" + e +"};\n"
+                tex_code = tex_code + "\\node" + placement + " (" + e + ") {$" + e +"$};\n"
                 
                 if o == 0 :
                     # highlight incoming factors
                     tex_code = tex_code + "\hilightsource{" + e + "};\n"
+                
+                # maybe outgoing factors = those that have no outgoing arrows instead of max order ??
                 elif o == len(level_factor_list_order[m]) - 1 :
                     # highlight outgoing factors
                     tex_code = tex_code + "\hilighttarget{" + e + "};\n"
@@ -1048,12 +1168,15 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
     return tex_code
 
                    
-def create_pdf(tex_code_table, number) :
+def create_pdf(tex_code_table) :
+   # creates a pdf of tex_code_table
+   # Latex_Template assumes that tex_code_table is a table of pairs of a number (used to reference the index of the element) and
+   # a string that contains valid TikZ code.
    
     output_file = "output_graph.tex"
     # defining the template (already prepared file)
     template = latex_jinja_env.get_template('Latex_Template.tex')
-    render = template.render(data = tex_code_table, maxnumber = number)
+    render = template.render(data = tex_code_table, maxnumber = len(tex_code_table))
     
     # save the generarted string as tex file
     f = open(output_file, 'wb')
@@ -1075,6 +1198,7 @@ def create_pdf(tex_code_table, number) :
 def main() :
     # main function
     
+    input_file = "r_output.txt"
     
     level_factor_list = []               # declaration of the lists
     level_factor_order_list = []
@@ -1085,9 +1209,10 @@ def main() :
     # steps 1 - 3 start function read_R_file -> converts cna output into lists that are sorted by constitution level
     # of causal factors (level_factor_list), causal relations (level_equiv_list) and one list of constitution relations
     # (constitution_relation_list), if the cna output is not as expeceted stop the procedure with abort = True
-    abort, level_factor_list, level_equiv_list, constitution_relation_list, solution_list = read_R_file("r_output.txt")
+    abort, level_factor_list, level_equiv_list, constitution_relation_list, solution_list = read_R_file(input_file)
     
     if not(abort) :
+        # step 4 will sort out the correct solutions among those generated by cna
         solution_term_list = []
         solution_list = cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, constitution_relation_list)
         
@@ -1110,30 +1235,53 @@ def main() :
                     level_equiv_list[get_formula_level(formula[0], level_factor_list)].append(formula)
 
                 
-                # continue with steps 4 and 5 that determine the causal order of the factors
+                # continue with steps 5 and 6 that determine the causal order of the factors
                 abort, unique, level_factor_list_order = determine_factor_order(level_factor_list, level_equiv_list)
                 if not(abort) :
                     if unique :
                         # if the causal order of the factors is uniquely determinable:
-                        # steps 6 and 7 minisation of the causal and constitution relations
-                        level_equiv_list, constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
-                    # step 8: graphical output as a graph in pdf
-                    st = print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list)
-                    
-                    counter = counter + 1
-                    entry = (counter, st)
-                    tex_table.append(entry)
-                    
-                
-                    # DAS WEITERE MUSS NOCH BEDACHT WERDEN [hierhier]
-                    #else :
-                    #    print("non-unique result")                     
-                    #    level_equiv_list, constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
-                    
-            create_pdf(tex_table, counter)
-                    
-    for sol in solution_list :
-        print(sol)          
-                    
+                        # step 7 minimalisation of the constitution relations
+                        new_constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
+                        
+                        # step 8: graphical output as a graph in pdf
+                        
+                        # generating the tex-code
+                        st = print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, new_constitution_relation_list)
+                        
+                        # subtitle of the graph will be the formula in tex-math syntax
+                        subtitle = ""
+                        for term in sol :
+                            subtitle = subtitle + "(" + term.replace("*", " \cdot ").replace("<->", "\leftrightarrow") + ")\cdot"
+                        
+                        subtitle = subtitle[:-5]
+                        
+                        # counter numerates the solutions
+                        counter = counter + 1
+                        entry = (counter, st, subtitle)
+                        tex_table.append(entry)
+                        
+                        
+                    else :
+                        # unique == False
+                        # causal structure is non-unique -> no valid solution
+                        
+                        # print that this solution does not correspond with a single causal structure
+                        st = ""
+                        for term in sol :
+                            st = st + "*(" + term + ")"
+                        
+                        st = st[1:] # remove first character (formula should not start with leading "*")
+                        print("Solution " + st + " has a non-unique causal structure. It is discarded.")
+             
+            # after one entry in tex_table for each solution has been generated compile the pdf
+            create_pdf(tex_table)
+            
+        else :
+            # solution_list is empty
+            # no solution survived selection of valid solutions
+            print("No valid complex solution formula has been found in " + input_file + ".")   
+            
+                     
 if __name__ == '__main__':
+    # start main() when executing this script file
     main()
