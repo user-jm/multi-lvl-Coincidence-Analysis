@@ -22,6 +22,11 @@ Python script that generates the possible causal diagramms from the R output
 **This is our main file (to be executed).**
 
 
+## search_formula.py und tree.py
+
+Python modules with auxiliary functions
+
+
 ## r_output.txt
 
 R output = Python input
