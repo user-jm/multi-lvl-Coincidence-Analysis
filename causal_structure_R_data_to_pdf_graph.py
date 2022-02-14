@@ -395,7 +395,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                             
                         elif conj in get_components_from_formula(disj, level_factor_list_order) :
                             # case B ii) the conjunct is a mere factor
-                            st = st + "\draw[conjunctonsegment] (" + conj + ") to (" + cross_point + "aux);\n"
+                            st = st + "\draw[conjunctonsegment] (" + conj + ".east) to (" + cross_point + "aux);\n"
                             
                         else :
                             # Is there anything else that might happen??
@@ -459,7 +459,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                 else :
                     # case B: factor conj occurs non-negated
                     
-                    st = st + "\draw[conjunctonsegment] (" + conj + ") to (" + formula[1] + "aux);\n"
+                    st = st + "\draw[conjunctonsegment] (" + conj + ".east) to (" + formula[1] + "aux);\n"
             
             # draw arrow from junction to target factor
             # experimental with tiny label above vertex
