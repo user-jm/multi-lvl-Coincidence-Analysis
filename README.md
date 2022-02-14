@@ -4,7 +4,7 @@
 
 Python script that generates the possible causal diagramms from the R output file r_output.txt, using the latex template Latex_Template.tex. Both files must be in the same folder as the script file. 
 
-**This is our main file (to be executed).**
+**This is the main file (to be executed).**
 
 This requires besides a Python3 environment, a latex distribution installed on the system running this script, as well as the jinja2 Python3 library and the TikZ library for latex.
 
