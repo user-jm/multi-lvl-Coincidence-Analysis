@@ -6,10 +6,7 @@ Python script that generates the possible causal diagramms from the R output fil
 
 **This is our main file (to be executed).**
 
-This requires besides a Python3 environment, a latex distribution installed on the system running this script, as well as the following Python3 libraries:
-codecs,
-re,
-jinja2.
+This requires besides a Python3 environment, a latex distribution installed on the system running this script, as well as the jinja2 Python3 library and the TikZ library for latex.
 
 
 ## Latex_Template.tex
