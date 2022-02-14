@@ -61,34 +61,43 @@ def find_causal_factors(st) :
     # returns the list of components of st that were separated by ", " or " < "
     return re.split(",\s*|\s*<\s*", st)
     
-    
-def get_equiv_formula(st):
-    # returns the leftside and rightside partial formulae of the "alpha <-> beta" from the input string st
-    # as pairs of strings (a,b)
-    a = re.split(" <-> ",st)[0].strip()          # strip() removes leading spaces
-    b = re.split(" <-> ",st)[1].strip()
-    
+def convert_negation_syntax(st) :
     # conversion of the negation syntax (in cna by minuscle) such that "a" -> "~A"
     # 1. step: add "~" before each minuscle, which is either
     # a) at the beginning of a formula
     # b) follows a conjunctor
     # c) follows a disjunctor
-    a = re.sub(r'^([a-z])',  r'~\1', a)
+    # d) follows an opening bracket
+    st = re.sub(r'^([a-z])',  r'~\1', st)
     # explanation:  "sub" replaces each instance of a minuscle (expressed by "[a-z]")
     # by itself plus the prefix "~",
     # if it has been found at the first position of the string (implicated by "^")
 
     # b) if following a "*", the letter will be placed behind "*~"
-    a = re.sub(r'\*([a-z])',  r'*~\1', a)
+    st = re.sub(r'\*([a-z])',  r'*~\1', st)
     # The regex expression "\*" picks the star symbol "*" from the string.
 
     # c) if following " + ", the letter will be placed behind "+ ~"
-    a = re.sub(r'\s\+\s([a-z]+)',  r' + ~\1', a)
+    st = re.sub(r'\s\+\s([a-z]+)',  r' + ~\1', st)
     # in regex "\s" corresponds to spaces, "\+" to "+"
+    
+    # d) if following a "(", the letter will be placed behind "(~"
+    st = re.sub(r'\(([a-z])',  r'(~\1', st)
+    # The regex expression "\(" picks the star symbol "(" from the string.
 
     # 2. step replacement of the minuscle that follow to "~" by majuscle
-    a = re.sub(r'(~[a-z]+)', lambda pat: pat.group(1).upper(), a)
+    st = re.sub(r'(~[a-z]+)', lambda pat: pat.group(1).upper(), st)
     
+    return st
+    
+    
+def get_equiv_formula(st) :
+    # returns the leftside and rightside partial formulae of the "alpha <-> beta" from the input string st
+    # as pairs of strings (a,b)
+    a = re.split(" <-> ",st)[0].strip()          # strip() removes leading spaces
+    b = re.split(" <-> ",st)[1].strip()
+    
+    a = convert_negation_syntax(a)
     
     # The lines of the cna output contain further stuff, we can get rid off it:
     b = re.split("[ \t]",b)[0]
@@ -344,7 +353,17 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                                 f_fac = fac
                     
                     cross_point = cross_point + formula[1]
-                    position = "at ([xshift=\hDisjConj, yshift=\\vDisjConj]" + f_fac + ".east)"
+                    
+                    if get_factor_order(f_fac, level_factor_list_order) < get_factor_order(formula[1], level_factor_list_order) :
+                        # this is the normal non-circular case
+                        position = "at ([xshift=\hDisjConj, yshift=\\vDisjConj]" + f_fac + ".east)"
+                        circular = False
+                    else :
+                        # circular case, f_fac has the same horizontal coordinate as the target factor,
+                        # so the junction should not be placed to the right of f_fac but to the left
+                        
+                        position = "at ([xshift=\hcDisjConj, yshift=\\vDisjConj]" + f_fac + ".west)"
+                        circular = True
                     
                     # Attention: It might happen that several disjuncts of conjuncts meet at the same factor f_fac,
                     # therefore we have to check whether the position of the junction node has to be shifted.
@@ -352,7 +371,11 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     while (tex_code.find(position) > -1) or (st.find(position) > -1) :  
                         # this position has already been specified in earlier vertices (tex_code) or this one
                         # -> shift it above by \tDisjConj
-                        position = "at ([xshift=\hDisjConj, yshift={\\vDisjConj + " + str(q) + "*\\tDisjConj}]" + f_fac + ".east)"
+                        if circular :
+                            position = "at ([xshift=\hcDisjConj, yshift={\\vDisjConj + " + str(q) + "*\\tDisjConj}]" + f_fac + ".west)"
+                        else :
+                            position = "at ([xshift=\hDisjConj, yshift={\\vDisjConj + " + str(q) + "*\\tDisjConj}]" + f_fac + ".east)"
+                        
                         q = q + 1
                         
                     st = st  + "% junction of the conjuncts\n\\node[aux] (" + cross_point + "aux) " + position + " {};\n% partial arrows from the conjuncts to the junction\n"
@@ -558,8 +581,10 @@ def read_R_file(file_name):
                 
                 # delete end-of-line-symbol ("\n") and spaces at the end of line (with rstrip()) if necessary, as well as
                 # removes leading spaces (with strip())
-                # then add this line to solution_list
-                solution_list.append(re.sub("\r?\n","",line).rstrip().strip())
+                # then add this line to solution_list                
+                solution_list.append(convert_negation_syntax(re.sub("\r?\n","",line).rstrip().strip()))
+                
+                
                 
         same_as_asf = False
         if not(solution_list) :  # if solution_list is empty (no line with more than one occurrence of "<->" has been found)
@@ -748,8 +773,11 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
     
     return new_solution_list
     
-def determine_factor_order(level_factor_list,level_equiv_list) :    
-    # description
+def determine_factor_order(level_factor_list, level_equiv_list) :    
+    # uses the list of causal relations in level_equiv_list to determine a total causal ordering of the causal factors
+    # in level_factor_list for each level separately
+    # returns a Boolean value whether the process has been aborted due to some error, another Boolean whether this
+    # ordering permits a unique order and the new factor list level_factor_list_order that is nested twice by level and causal order
     
     level_count = len(level_factor_list)
     abort = False
@@ -924,13 +952,25 @@ def determine_factor_order(level_factor_list,level_equiv_list) :
             #    print("order " + str(p))
             #     print(level_factor_list_order[m][p])
             
+            
                        
             if downstream_factor_list:
-                # if downstream_factor_list is not empty, the causal structure is not unique
-                # There are some causal factors that cannot be categorised into level_factor_list_order.
-                unique = False
+                # If downstream_factor_list is not empty, there are some causal factors that cannot be categorised
+                # into level_factor_list_order.
+                
+                # test-wise set the causal order of all remaining factors to max order + 1
+                circular = True
+                
+                level_factor_list_order[m].append([])
+                
+                for fac in downstream_factor_list :
+                    level_factor_list_order[m][len(level_factor_list_order[m]) - 1].append(fac)
+                    
+            else :
+                circular = False 
+                
                
-    return abort, unique, level_factor_list_order
+    return abort, unique, circular, level_factor_list_order
     
     
     
@@ -1225,6 +1265,13 @@ def main() :
             solution_term_list = create_term_list(solution_list)
             
             counter = 0
+            
+            
+            if len(solution_term_list) > 100 :   # limiting the output to 100 solutions
+                # remove this if-clause if more solutions are required
+                print("More than 100 solutions obtained, plotting only the first 100.")
+                for i in range(len(solution_term_list) - 1, 99, -1) :
+                    del solution_term_list[i]
                         
             for sol in solution_term_list :
 
@@ -1238,7 +1285,7 @@ def main() :
 
                 
                 # continue with steps 5 and 6 that determine the causal order of the factors
-                abort, unique, level_factor_list_order = determine_factor_order(level_factor_list, level_equiv_list)
+                abort, unique, circular, level_factor_list_order = determine_factor_order(level_factor_list, level_equiv_list)
                 if not(abort) :
                     if unique :
                         # if the causal order of the factors is uniquely determinable:
@@ -1251,11 +1298,14 @@ def main() :
                         st = print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, new_constitution_relation_list)
                         
                         # subtitle of the graph will be the formula in tex-math syntax
-                        subtitle = ""
+                        subtitle = "\\tiny $"
                         for term in sol :
-                            subtitle = subtitle + "(" + term.replace("*", " \cdot ").replace("<->", "\leftrightarrow") + ")\cdot"
+                            subtitle = subtitle + "(" + term.replace("*", " \cdot ").replace("~", "\\neg ").replace("<->", "\leftrightarrow ") + ")\cdot"
                         
-                        subtitle = subtitle[:-5]
+                        subtitle = subtitle[:-5] + "$"
+                        
+                        if circular :
+                            subtitle = "circular causal structure\\\\[4mm]" + subtitle
                         
                         # counter numerates the solutions
                         counter = counter + 1
@@ -1275,8 +1325,11 @@ def main() :
                         st = st[1:] # remove first character (formula should not start with leading "*")
                         print("Solution " + st + " has a non-unique causal structure. It is discarded.")
              
-            # after one entry in tex_table for each solution has been generated compile the pdf
-            create_pdf(tex_table)
+            
+            # after one entry for each solution has been generated in tex_table compile the pdf
+            if tex_table :
+                # if tex_table is non-empty
+                create_pdf(tex_table)
             
         else :
             # solution_list is empty

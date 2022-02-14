@@ -21,11 +21,12 @@
 % definition of constants
 \def\LNeg{0.03cm}% distance of the negation symbol to the corresponding node of the causal factor
 \def\LConj{-0.5cm}% distance of the conjunction junction to the target node
-\def\hDisjConj{0.9cm}% horizontal position of conjunction junction of a disjunction relative to the first source node
+\def\hDisjConj{0.9cm}% horizontal position of conjunction junction of a disjunction relative to the first source node (normal, non-circular case)
+\def\hcDisjConj{-0.3cm}% horizontal position of conjunction junction of a disjunction relative to the first source node (circular case, source and target node are horizontalle aligned)
 \def\vDisjConj{0.2cm}% vertical position of conjunction junction of a disjunction relative to the first source node
 \def\tDisjConj{0.3cm}% shift of  conjunction junction in case that it would overlap with another junction
 \def\LvDist{0.8cm}% vertical distance between nodes of the same level and causal order
-\def\LhDist{1.2cm}% horizontal distance between nodes of the same level and subsequent causal orders
+\def\LhDist{2cm}% horizontal distance between nodes of the same level and subsequent causal orders
 \def\iLvDist{1.4cm}% vertical distance between neighbouring levels
 \def\HeightNode{0.6cm}% height of nodes
 \def\LabelDist{-2mm}% vertical distance of labels from vertices
@@ -41,7 +42,7 @@
 \VAR{entry}
 % End formula from file
 \end{tikzpicture}\\[4mm]
-\tiny $\VAR{subtitle}$
+\VAR{subtitle}
 \end{page}
 \BLOCK{endfor}
 
