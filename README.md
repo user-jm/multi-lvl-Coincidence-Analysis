@@ -2,7 +2,7 @@
 
 ## causal_structure_R_data_to_pdf_graph.py
 
-Python script that generates the possible causal diagramms from the R output file r_output.txt, using the latex template Latex_Template.tex. Both files have to put into the same folder as the script file. 
+Python script that generates the possible causal diagramms from the R output file r_output.txt, using the latex template Latex_Template.tex. Both files must be in the same folder as the script file. 
 
 **This is our main file (to be executed).**
 
