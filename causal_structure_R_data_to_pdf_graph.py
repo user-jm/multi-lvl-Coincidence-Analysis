@@ -384,11 +384,13 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     # experimental label above the connection for very convoluted graphs
                     st_conj = "$"
                     for conj in conjunctor_list :
-                        st_conj = st_conj + conj + "\cdot"
+                        if conj[0] == "~" :
+                            st_conj = st_conj + "\\neg " + conj[1:] + "\cdot "                    
+                        else :
+                            st_conj = st_conj + conj + "\cdot "
                         
-                    st_conj = st_conj[:-5] + "$"
-                    
-                    st = st + "% arrow from junction to target factor\n\draw[->] (" + cross_point + "aux) -- (" + formula[1] + ".west) node[draw=none,fill=none,font=\\tiny,pos=0,above=\LabelDist,sloped] {\scalebox{.3}{" + st_conj + "}};\n"
+                    st_conj = st_conj[:-6] + "$"
+                    st = st + "% arrow from junction to target factor\n\draw[->] (" + cross_point + "aux) -- (" + formula[1] + ".west) node[draw=none,fill=none,font=\\tiny,pos=0,sloped,above=\LabelDist] {\scalebox{.3}{" + st_conj + "}};\n"
                 
                 elif (disj[0] == "~") and (disj[1:] in get_components_from_formula(formula[0], level_factor_list_order)) :
                     # case C: the disjunction is a negated factor
@@ -439,7 +441,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
             
             # draw arrow from junction to target factor
             # experimental with tiny label above vertex
-            st = st + "% arrow from junction to target factor\n\draw[->] (" + formula[1] + "aux) -- (" + formula[1] + ") node[draw=none,fill=none,font=\\tiny,above=\LabelDist,pos=0,sloped] {\scalebox{.3}{$" + formula[0].replace("*", "\cdot ") + "$}};\n"
+            st = st + "% arrow from junction to target factor\n\draw[->] (" + formula[1] + "aux) -- (" + formula[1] + ") node[draw=none,fill=none,font=\\tiny,above=\LabelDist,pos=0,sloped] {\scalebox{.3}{$" + formula[0].replace("*", "\cdot ").replace("~", "\\neg ") + "$}};\n"
             
         else :
             # this should never happen
