@@ -4,10 +4,10 @@
 
 # This script reads the output of a Coincidence Analysis (CNA) of some given truth table of a tiered list
 # of causal factors and attempts to generate causal graphs for each unique solution. These are finally exported
-# into a graph in Latex TikZ-code. It assumes that the causal factors pertain to different levels, which are separated
-# by the cna causal ordering relation "<". Relations between factors of different levels are not considered as causal
-# but constitution relations. Accordingly the script separates causal and constitution relations in the complex solution
-# formulae of cna.
+# into a graph in Latex TikZ-code. Therefore latex and the tikz library have to be installed on the system running this script. 
+# It assumes that the causal factors pertain to different levels, which are separated by the cna causal ordering relation "<".
+# Relations between factors of different levels are not considered as causal but constitution relations. Accordingly the 
+# script separates causal and constitution relations in the complex solution formulae of cna.
 
 # It proceeds in eight steps:
 # step 1: generates a list of the causal factors that appear in the cna-generated solutions (part of the function read_R_file)
@@ -23,7 +23,6 @@
 # the constitution relations are generated from its atomic solution formulae, there still many to be sorted out, since all
 # possible equivalences are listed (function find_structure)
 # step 8: translates the obtained structures into a graphical output via Latex
-
 
 
 import os                       # operating system interfaces is required to find the files of the own path
@@ -1307,7 +1306,7 @@ def main() :
                         if circular :
                             subtitle = "circular causal structure\\\\[4mm]" + subtitle
                         
-                        # counter numerates the solutions
+                        # counter enumerates the solutions
                         counter = counter + 1
                         entry = (counter, st, subtitle)
                         tex_table.append(entry)
