@@ -1,4 +1,4 @@
-# sixth test: Baumgartner's example "volatile"
+# sixth test: Baumgartner's example "volatile", circular single level structure
 library(cna)
 
 setwd("..") # export output file to parent folder

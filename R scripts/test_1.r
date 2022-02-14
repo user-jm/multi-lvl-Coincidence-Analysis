@@ -1,4 +1,4 @@
-# first test -- causal structure from Harbecke 2018 with an upper level (A*B->C)
+# first test -- causal structure from Harbecke 2018 with an added upper level (A*B->C)
 library(cna)
 
 rnames <- c(1,2,3,4,5,6,7,8) # row names

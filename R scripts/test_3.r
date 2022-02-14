@@ -1,4 +1,4 @@
-# third test -- unique causal chain with conjuncts, disjuncts and negations
+# third test -- unique causal chain with conjuncts, disjuncts and negations, variation of test_2
 
 library(cna)
 

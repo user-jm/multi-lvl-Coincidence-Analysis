@@ -1,4 +1,4 @@
-# fifth test: Baumgartner's example "women"
+# fifth test: Baumgartner's example "women", simple single level structure
 library(cna)
 
 setwd("..") # export output file to parent folder

@@ -1,4 +1,4 @@
-# seventh test: Baumgartner's example "highdim" -- extremely large data set
+# seventh test: Baumgartner's example "highdim" -- extremely large data set 
 library(cna)
 
 setwd("..") # export output file to parent folder

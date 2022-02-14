@@ -1,4 +1,4 @@
-# fourth test: relation with negations
+# fourth test: relation with negations, simple single level structure
 library(cna)
 
 rnames <- c(1,2,3,4,5,6,7,8) # row names

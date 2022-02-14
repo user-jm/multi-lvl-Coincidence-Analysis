@@ -1,4 +1,4 @@
-# second test -- a simple causal chain
+# second test -- a simple causal chain on two levels
 library(cna)
 
 rnames <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) # row names
