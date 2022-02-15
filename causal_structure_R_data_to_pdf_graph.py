@@ -229,10 +229,28 @@ def create_term_list(solution_list) :
     for i in range(len(solution_list)) :        # for each solution from cna
         solution_term_list.append([])           # add a new sublist to solution_term_list
         
+        # CNA's csf output comes in form of a table -- the formula has to be separated
+        if solution_list[i].find("(") > -1 :
+            string = "(" + solution_list[i].split("(",1)[1]  # cut everything before the first bracket
+            
+            print(string)
+        else :
+            string = solution_list[i]
+        
+        # remove evertything after the last closing bracket
+        if solution_list[i].find(")") > -1 :
+            string2 = ""
+            sub_string = ""
+            for st in string.split(")") :
+                string2 = string2 + sub_string
+                sub_string = st + ")"
+            string = string2
+         
+         
         # the entries of solution_list have the form "(A*B + C <-> E)*(D*E + B + ~C <-> F)* ... "
         # split these formulae into their terms (split by occurrences of the string ")*(")
         # and add the parts to solution_term_list[i]
-        solution_term_list[i] = re.split("\)\*\(", solution_list[i])
+        solution_term_list[i] = re.split("\)\*\(", string)
         
         # remove first opening bracket of the first element
         if solution_term_list[i][0][0] == "(" :
@@ -698,7 +716,7 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
             # does term not match any valid atomic solution formula?
             if not(any(get_equiv_formula(term) in j for j in level_equiv_list)) and not(get_equiv_formula(term) in constitution_relation_list) :
                 # explanation: any(a in b for b in c) checks whether a is an element of a sublist of c
-                
+
                 valid = False  # then flag the corresponding solution as invalid
                 break          # one invalid term is sufficient, leave the for-loop over the terms if one has been found
         
