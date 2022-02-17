@@ -15,9 +15,9 @@
 
 
 \def\hilightsource#1{\draw[densely dashed,-latex] ($(#1)-(8mm,0)$) -> ($(#1)-(3mm,0)$);%
-  \fill [green, opacity=.25] (#1) circle [radius=3mm]; }%
+  \draw (#1) circle [radius=3mm]; }%
 \def\hilighttarget#1{\draw[densely dashed,-latex] ($(#1)+(3mm,0)$) -> ($(#1)+(8mm,0)$);%
-  \fill [red, opacity=.25] (#1) circle [radius=3mm]; }%
+  \draw (#1) circle [radius=3mm]; }%
 % definition of constants
 \def\LNeg{0.03cm}% distance of the negation symbol to the corresponding node of the causal factor
 \def\LConj{-0.5cm}% distance of the conjunction junction to the target node

@@ -761,7 +761,6 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
                     
                     if not(found) :    # if one factor hasn't been found in any term, this solution is to be discarded
                         complete = False
-                        print(fac)
                         break         # break from fac-loop
         
             if not(complete) : break # break from lvl-loop if one absent factor has been found
@@ -1194,8 +1193,13 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
                     # highlight incoming factors
                     tex_code = tex_code + "\hilightsource{" + e + "};\n"
                 
-                # maybe outgoing factors = those that have no outgoing arrows instead of max order ??
-                elif o == len(level_factor_list_order[m]) - 1 :
+                
+                if not(any(e in get_components_from_formula(formula[0], level_factor_list_order) for formula in level_equiv_list[m])) :
+                    # outgoing factors = those that have no outgoing arrows
+                    # They do not appear on the complex side of a causal relation.
+                    
+                   
+                    # alt:o == len(level_factor_list_order[m]) - 1 :
                     # highlight outgoing factors
                     tex_code = tex_code + "\hilighttarget{" + e + "};\n"
                 
