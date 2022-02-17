@@ -21,7 +21,7 @@ The script requires input data in form of the CNA output standard. This file has
 
 ## R_test_frames
 
-A folder that contains some sample R-scripts that make use of the CNA-package. Some of the examples model multi level mechanisms. (not required for running the script)
+A folder that contains some sample R-scripts that make use of the CNA-package. Some of the examples model multi level mechanisms. The content of this folder is not required for running the script.
 
 - **test_1.r**  
 causal structure from (Harbecke, 2018) with an added upper level
