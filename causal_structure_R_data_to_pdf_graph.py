@@ -233,7 +233,6 @@ def create_term_list(solution_list) :
         if solution_list[i].find("(") > -1 :
             string = "(" + solution_list[i].split("(",1)[1]  # cut everything before the first bracket
             
-            print(string)
         else :
             string = solution_list[i]
         
@@ -245,7 +244,6 @@ def create_term_list(solution_list) :
                 string2 = string2 + sub_string
                 sub_string = st + ")"
             string = string2
-         
          
         # the entries of solution_list have the form "(A*B + C <-> E)*(D*E + B + ~C <-> F)* ... "
         # split these formulae into their terms (split by occurrences of the string ")*(")
@@ -747,23 +745,31 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
     for i in range(len(solution_list)-1,-1,-1) : # regressive for-loop over all elements of solution_list
         complete = True
         for lvl in level_factor_list : # go through all levels
-            for fac in lvl :           # and all factors
-                found = False
-                for term in solution_term_list[i] :
-                    if fac in get_components_from_formula(term, level_factor_list) : 
-                        # if fac occurs in term, we can stop looking for that factor
-                        found = True
-                        break      # hence, break the term-loop
+            
+            if len(lvl) > 1 : # if that level contains only one factor, there is no causal relation on that level
+                # possible problem: a level that contains incoming factors only
+                # at this point these cannot be detected
+                
+                
+                for fac in lvl :       # go through all factors of that level
+                    found = False
+                    for term in solution_term_list[i] :
+                        if fac in get_components_from_formula(term, level_factor_list) : 
+                            # if fac occurs in term, we can stop looking for that factor
+                            found = True
+                            break      # hence, break the term-loop
                     
-                if not(found) :    # if one factor hasn't been found in any term, this solution is to be discarded
-                    complete = False
-                    break         # break from fac-loop
+                    if not(found) :    # if one factor hasn't been found in any term, this solution is to be discarded
+                        complete = False
+                        print(fac)
+                        break         # break from fac-loop
         
             if not(complete) : break # break from lvl-loop if one absent factor has been found
         
         if not(complete) :
             del solution_list[i]      # since the for-loop is regressive list elements can safely be deleted
             del solution_term_list[i]  
+            
         
     print("Number of solutions after sorting out causally incomplete structures " + str(len(solution_list)))
     
