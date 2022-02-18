@@ -139,7 +139,7 @@ def get_components_from_formula(st, factor_list):
     
     return component_list
 
-def get_formula_level(st, level_factor_list):
+def get_formula_level(st, level_factor_list) :
     # if all factors in st are of the same level, get_formula_level returns this level,
     # otherwise it returns -1
     
@@ -291,6 +291,7 @@ def rearrange_level_factor_list(level_factor_list_order, level_equiv_list, const
     
     new_level_factor_list_order = []
     
+    
     # performing 1)
 
     dictionary = {} # create a dictionary, for each lower level factor, the upper level factor it is a part of will be added
@@ -322,10 +323,11 @@ def rearrange_level_factor_list(level_factor_list_order, level_equiv_list, const
 
             c_fac = ""   # dictionary[c_fac] will be used as comparison value to find the other factors with the same target
             for fac in dictionary :
-                if dictionary[fac] != "" :
-                    # start value of c_fac should be some factor with dictionary[c_fac] != "" if possible
-                    c_fac = fac 
-                    break   # end for loop after first dictionary entry with an assigned upper level factor has been found
+                if get_formula_level(fac, level_factor_list_order) == m :
+                    if dictionary[fac] != "" :
+                        # start value of c_fac should be some factor with dictionary[c_fac] != "" if possible
+                        c_fac = fac 
+                        break   # end for loop after first dictionary entry with an assigned upper level factor has been found
             
             if c_fac == "" :
                 # if no factor of first order is linked to any factor of an upper level, start with the first one from the original list
@@ -334,7 +336,7 @@ def rearrange_level_factor_list(level_factor_list_order, level_equiv_list, const
             new_level_factor_list_order[m][0].append(c_fac)
             
             counter = 0
-            while len(dictionary) > len(new_level_factor_list_order[m][0]) :
+            while len(level_factor_list_order[m][0]) > len(new_level_factor_list_order[m][0]) :
                 # as long as the dictionary contains more entries than the new factor list
                 
                 if not(level_factor_list_order[m][0][counter] in new_level_factor_list_order[m][0]) :
@@ -353,7 +355,7 @@ def rearrange_level_factor_list(level_factor_list_order, level_equiv_list, const
                         new_level_factor_list_order[m][0].append(level_factor_list_order[m][0][counter])
                 
                 # adjust the counter for the next run through the loop    
-                if counter == len(dictionary) - 1 :
+                if counter == len(level_factor_list_order[m][0]) - 1 :
                     counter = 0
                     c_fac = ""
                 else :
