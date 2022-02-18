@@ -1,23 +1,35 @@
 \documentclass[multi=page,crop,11pt,varwidth,border=2pt]{standalone}
+\usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{graphicx} % for scale box
 \usetikzlibrary{arrows, fit, positioning, shapes, graphs, quotes, calc, bbox}
 
 \begin{document}
+% define colors (ColorBrewer scheme Paired-12
+\definecolor{color0}{RGB}{166,206,227}
+\definecolor{color1}{RGB}{31,120,180}
+\definecolor{color2}{RGB}{178,223,138}
+\definecolor{color3}{RGB}{51,160,44}
+\definecolor{color4}{RGB}{251,154,153}
+\definecolor{color5}{RGB}{227,26,28}
+\definecolor{color6}{RGB}{253,191,111}
+\definecolor{color7}{RGB}{255,127,0}
+\definecolor{color8}{RGB}{202,178,214}
+\definecolor{color9}{RGB}{106,61,154}
+%\definecolor{color10}{RGB}{255,255,153} poorly legible, therefore discared
+\definecolor{color10}{RGB}{177,89,40}
 
-\tikzset{every node/.style={circle, draw, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt}}% definition for normal nodes = nodes of causal factors
-\tikzstyle{aux} = [circle, draw, fill=black, minimum size=0.5mm, text width=0.5mm]% auxiliary nodes for conjunction junctions
+\tikzset{every node/.style={circle, draw, thick, minimum size=6mm, text width=5.5mm, align=center, inner sep = 0pt}}% definition for normal nodes = nodes of causal factors
+\tikzstyle{aux} = [circle, draw, fill, minimum size=0.5mm, text width=0.5mm]% auxiliary nodes for conjunction junctions
 \tikzstyle{neg} = [diamond, draw, minimum size=1mm, text width=1mm]% auxiliary nodes for negations
 \tikzstyle{conjunctonsegment} = [in=170,out=-10]% conjuctive connection lines are curved to easily distinguish them from disjunctions
-\tikzstyle{crelationleft} = [->,densely dotted,gray,in=200,out=120]% style for the leftside constitution relations
-\tikzstyle{crelationright} = [->,densely dotted,gray,in=-20,out=60]% style for the rightside constitution relations
-\tikzstyle{crelationstraight} = [->,densely dotted,gray]% style for single constitution relations
+\tikzstyle{crelationleft} = [->,densely dotted,in=200,out=120]% style for the leftside constitution relations
+\tikzstyle{crelationright} = [->,densely dotted,in=-20,out=60]% style for the rightside constitution relations
+\tikzstyle{crelationstraight} = [->,densely dotted]% style for single constitution relations
 
 
-\def\hilightsource#1{\draw[densely dashed,-latex] ($(#1)-(8mm,0)$) -> ($(#1)-(3mm,0)$);%
-  \draw (#1) circle [radius=3mm]; }%
-\def\hilighttarget#1{\draw[densely dashed,-latex] ($(#1)+(3mm,0)$) -> ($(#1)+(8mm,0)$);%
-  \draw (#1) circle [radius=3mm]; }%
+\def\hilightsource#1{\draw[densely dashed,-latex] ($(#1)-(8mm,0)$) -> ($(#1)-(3mm,0)$)}%
+\def\hilighttarget#1{\draw[densely dashed,-latex] ($(#1)+(3mm,0)$) -> ($(#1)+(8mm,0)$)}%
 % definition of constants
 \def\LNeg{0.03cm}% distance of the negation symbol to the corresponding node of the causal factor
 \def\LConj{-0.5cm}% distance of the conjunction junction to the target node

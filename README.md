@@ -8,6 +8,8 @@ Python script that generates the possible causal diagrams from the R output file
 
 This requires besides a Python3 environment, a latex distribution installed on the system running this script, as well as the jinja2 Python3 library and the TikZ library for latex.
 
+The script can be executed with the optional argument "-c", which changes the output graph from black/white into color. The argument "-bw" forces the black/white mode, which is currently set as standard.
+
 
 ## Latex_Template.tex
 

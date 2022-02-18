@@ -7,7 +7,7 @@
 # into a graph in Latex TikZ-code. Therefore latex and the tikz library have to be installed on the system running this script. 
 # It assumes that the causal factors pertain to different levels, which are separated by the cna causal ordering relation "<".
 # Relations between factors of different levels are not considered as causal but constitution relations. Accordingly the 
-# script separates causal and constitution relations in the complex solution formulae of cna.
+# script separates causal and constitution relations in the complex solution formulae of CNA.
 
 # It proceeds in eight steps:
 # step 1: generates a list of the causal factors that appear in the cna-generated solutions (part of the function read_R_file)
@@ -26,6 +26,7 @@
 
 
 import os                       # operating system interfaces is required to find the files of the own path
+import sys                      # system-specific parameters and functions, needed to get optional script arguments
 import codecs                   # for en- and decoding of strings (esp. to get tex-files in utf-8)
 import re                       # regex for complex search patterns in strings
 import jinja2                   # Latex interface
@@ -190,17 +191,17 @@ def get_formula_level(st, level_factor_list):
         
     return level
 
-def get_factor_order(factor, factor_list):
+def get_factor_order(factor, factor_list) :
     # determines the order of a causal factor relative to a factor list of the form
     # list[LEVEL][ORDER][FACTORS], if factor is contained in FACTORS, return the corresponding value of ORDER in the respective level
     # otherwise return -1
     order = -1
-    for m in range(len(factor_list)):
-        for o in range(len(factor_list[m])):
-            if factor in factor_list[m][o]:
+    for m in range(len(factor_list)) :
+        for o in range(len(factor_list[m])) :
+            if factor in factor_list[m][o] :
                 order = o
                 break       # we can stop after we have 
-        if o != -1 : break  # determined the order
+        if order != -1 : break  # determined the order
         
     return order
     
@@ -282,7 +283,124 @@ def get_causal_prefactors(factor, formula_list, factor_list) :
     return_list = list(set(return_list))  # get rid of duplicates
     return return_list
 
-def convert_causal_relation(formula, level_factor_list_order, tex_code) :
+def rearrange_level_factor_list(level_factor_list_order, level_equiv_list, constitution_relation_list) :
+    # prepares the factor list for plotting such that the nodes are arranged to minimise crossings of vertices
+    # 1) factors of same level and order zero are grouped when belonging to the same constitution relation
+    # 2) factors of same level and subsequent orders are arranged such that arrow crossing in the causal graphs becomes minimised
+    # (in a very rudimentary way)
+    
+    new_level_factor_list_order = []
+    
+    # performing 1)
+
+    dictionary = {} # create a dictionary, for each lower level factor, the upper level factor it is a part of will be added
+    
+    for m in range(len(level_factor_list_order) - 1) :
+        # highest level has not to be considered
+        
+        new_level_factor_list_order.append([]) # append a sublist for each level
+        new_level_factor_list_order[m].append([]) # in the sublist for level m append a subsublist for the first order factors
+        
+        if constitution_relation_list :        
+            # constitution_relation_list is not empty
+            # use the constitution relations to group the factors that belong to the same upper factor
+            
+            for fac in level_factor_list_order[m][0] :
+                # for each factor of first order
+                constitute = ""  # the upper level factor fac is a part of
+                for formula in constitution_relation_list :
+                    if fac in get_components_from_formula(formula[0], level_factor_list_order) :
+                        constitute = formula[1]
+                        break # break from formula loop (one factor might appear in several constitution relations, but only one can be 
+                        # considered for constructing an ordering)
+            
+                dictionary[fac] = constitute # add a new dictionary entry
+    
+            # fill first order of new_level_factor_list_order according to dictionary            
+            
+            # get first key of dictionary and add it as first element into new_level_factor_list_order[m][0]
+
+            c_fac = ""   # dictionary[c_fac] will be used as comparison value to find the other factors with the same target
+            for fac in dictionary :
+                if dictionary[fac] != "" :
+                    # start value of c_fac should be some factor with dictionary[c_fac] != "" if possible
+                    c_fac = fac 
+                    break   # end for loop after first dictionary entry with an assigned upper level factor has been found
+            
+            if c_fac == "" :
+                # if no factor of first order is linked to any factor of an upper level, start with the first one from the original list
+                c_fac = level_factor_list_order[m][0][0] 
+            
+            new_level_factor_list_order[m][0].append(c_fac)
+            
+            counter = 0
+            while len(dictionary) > len(new_level_factor_list_order[m][0]) :
+                # as long as the dictionary contains more entries than the new factor list
+                
+                if not(level_factor_list_order[m][0][counter] in new_level_factor_list_order[m][0]) :
+                    # if the factor with index counter is not yet in the new list
+                    # add, if
+                    if c_fac == "" :
+                        # there is no current upper level target assigned
+                        new_level_factor_list_order[m][0].append(level_factor_list_order[m][0][counter])
+                        # set the upper level target to that of the indexed factor
+                        c_fac = level_factor_list_order[m][0][counter]
+                        # reset counter to be sure that we start at the beginning of level_factor_list_order[m][0]
+                        counter = -1
+                        
+                    elif dictionary[level_factor_list_order[m][0][counter]] == dictionary[c_fac] :
+                        # the target of the indexed factor is the same as that of c_fac
+                        new_level_factor_list_order[m][0].append(level_factor_list_order[m][0][counter])
+                
+                # adjust the counter for the next run through the loop    
+                if counter == len(dictionary) - 1 :
+                    counter = 0
+                    c_fac = ""
+                else :
+                    counter = counter + 1
+            
+        # end constitution_relation_list is not empty                    
+        
+        else :
+            # constitution_relation_list is empty
+            # keep the order of factors from level_factor_list_order[m][0]
+            
+            for fac in level_factor_list_order[m][0] :
+                new_level_factor_list_order[m][0].append(fac)
+
+    # end for loop over the levels        
+    
+    max_level = len(level_factor_list_order) - 1    
+    new_level_factor_list_order.append([]) # append sublist for the highest level    
+    new_level_factor_list_order[max_level].append([]) # append subsublist for the zeroth order on the highest level    
+    
+    for fac in level_factor_list_order[max_level][0] :
+        new_level_factor_list_order[max_level][0].append(fac)
+        
+    # performing 2)
+    for m in range(len(level_factor_list_order)) :
+        for o in range(len(level_factor_list_order[m]) - 1) : # go through all orders but the last
+        
+            new_level_factor_list_order[m].append([]) # append a subsublist for order o+1 on level m
+
+            for fac in new_level_factor_list_order[m][o] :
+                for formula in level_equiv_list[m] : 
+                    if fac in get_components_from_formula(formula[0], level_factor_list_order) and (get_factor_order(formula[1], level_factor_list_order) == o+1) and not(formula[1] in new_level_factor_list_order[m][o+1]) :
+                        # if the considered factor appears on the left side of formula
+                        # AND the factor on formula's right side is of the subsequent order
+                        # AND that factor is not in new_level_factor list yet
+                        
+                        new_level_factor_list_order[m][o+1].append(formula[1]) # then add this factor
+
+            # end of loop over new_level_factor_list_order[m][o]
+            
+        # end of loop over orders
+        
+    # end of loop over levels
+    
+    return new_level_factor_list_order
+
+def convert_causal_relation(formula, level_factor_list_order, tex_code, color, color_map) :
     # translates a formula of causal relations into TikZ-Latex code
     # returns the code as string
     
@@ -311,10 +429,11 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
     for o in range(len(level_factor_list_order[level])) :
         for fac in level_factor_list_order[level][o] :
             if fac == formula[0] :  # the left side of formula equals one factor from the factor list
-                st = "\draw[->] (" + fac + ".east) -- (" + formula[1] + ".west);"
+                st = "\draw[->, " + color + "] (" + fac + ".east) -- (" + formula[1] + ".west);"
                 break    # stop after the factor has been found
             elif formula[0] == "~" + fac : # the left side of formula equals the negation of one factor from the factor list
-                st = "\\node[neg] (" + fac + "neg) at ([xshift=\LNeg]" + fac + ".south east) {};\n\draw[->] (" + fac + "neg) -- (" + formula[1] + ");"
+                color_neg = color_map["draw"][fac]
+                st = "\\node[neg, " + color_neg + "] (" + fac + "neg) at ([xshift=\LNeg]" + fac + ".south east) {};\n\draw[->, " + color + "] (" + fac + "neg) -- (" + formula[1] + ");"
                 break # stop after the factor has been found
                 
                 
@@ -343,7 +462,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     
                     # a straight arrow is drawn from source factor to target factor
                     st = st + "% simple disjunction\n"
-                    st = st + "\draw[->] (" + disj + ".east) to (" + formula[1] + ".west);\n"
+                    st = st + "\draw[->, " + color + "] (" + disj + ".east) to (" + formula[1] + ".west);\n"
                 
                 elif formula[0].find("*") > -1 :
                     # case B: the disjunct is a conjunction
@@ -393,7 +512,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                         
                         q = q + 1
                         
-                    st = st  + "% junction of the conjuncts\n\\node[aux] (" + cross_point + "aux) " + position + " {};\n% partial arrows from the conjuncts to the junction\n"
+                    st = st  + "% junction of the conjuncts\n\\node[aux, " + color + "] (" + cross_point + "aux) " + position + " {};\n% partial arrows from the conjuncts to the junction\n"
                         
                     
                     
@@ -406,12 +525,13 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                         # now connect the conjuncts with the junction
                         if conj[0] == "~" and conj[1:] in get_components_from_formula(disj, level_factor_list_order) :
                             # case B i) the conjunct is a negated factor
-                            st = st  + "\\node[neg] (" + conj[1:] + "neg) at ([xshift=\LNeg]" + conj[1:] + ".south east) {};\n"
-                            st = st + "\draw[conjunctonsegment] (" + conj[1:] + "neg) to (" + cross_point + "aux);\n"
+                            color_neg = color_map["draw"][conj[1:]]
+                            st = st  + "\\node[neg, " + color_neg + "] (" + conj[1:] + "neg) at ([xshift=\LNeg]" + conj[1:] + ".south east) {};\n"
+                            st = st + "\draw[conjunctonsegment, " + color + "] (" + conj[1:] + "neg) to (" + cross_point + "aux);\n"
                             
                         elif conj in get_components_from_formula(disj, level_factor_list_order) :
                             # case B ii) the conjunct is a mere factor
-                            st = st + "\draw[conjunctonsegment] (" + conj + ".east) to (" + cross_point + "aux);\n"
+                            st = st + "\draw[conjunctonsegment, " + color + "] (" + conj + ".east) to (" + cross_point + "aux);\n"
                             
                         else :
                             # Is there anything else that might happen??
@@ -428,7 +548,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                             st_conj = st_conj + conj + "\cdot "
                         
                     st_conj = st_conj[:-6] + "$"
-                    st = st + "% arrow from junction to target factor\n\draw[->] (" + cross_point + "aux) -- (" + formula[1] + ".west) node[draw=none,fill=none,font=\\tiny,pos=0,sloped,above=\LabelDist] {\scalebox{.3}{" + st_conj + "}};\n"
+                    st = st + "% arrow from junction to target factor\n\draw[->, " + color + "] (" + cross_point + "aux) -- (" + formula[1] + ".west) node[draw=none,text=black,fill=none,font=\\tiny,pos=0,sloped,above=\LabelDist] {\scalebox{.3}{" + st_conj + "}};\n"
                 
                 elif (disj[0] == "~") and (disj[1:] in get_components_from_formula(formula[0], level_factor_list_order)) :
                     # case C: the disjunction is a negated factor
@@ -438,8 +558,9 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     # changed to "if")
                     
                     st = st + "% negated disjunct\n"
-                    st = st  + "\\node[neg] (" + disj[1:] + "neg) at ([xshift=\LNeg]" + disj[1:] + ".south east) {};\n"
-                    st = st + "\draw[->] (" + disj[1:] + "neg) to (" + formula[1] + ".west);\n"
+                    color_neg = color_map["draw"][disj[1:]]
+                    st = st  + "\\node[neg, " + color_neg + "] (" + disj[1:] + "neg) at ([xshift=\LNeg]" + disj[1:] + ".south east) {};\n"
+                    st = st + "\draw[->, " + color + "] (" + disj[1:] + "neg) to (" + formula[1] + ".west);\n"
                 
                 
                 else :
@@ -459,7 +580,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
             # the only difference is that we here do not deal with a subformula of formula[0], but the whole
             
             # place junction of the conjuncts
-            st = "% junction of the conjuncts\n\\node[aux] (" + formula[1] + "aux) at ([xshift=\LConj]" + formula[1] + ".west) {};\n% partial arrows from the conjuncts to the junction\n"
+            st = "% junction of the conjuncts\n\\node[aux, " + color + "] (" + formula[1] + "aux) at ([xshift=\LConj]" + formula[1] + ".west) {};\n% partial arrows from the conjuncts to the junction\n"
             
             # plot the arrows from the conjuncts to the junction
             for conj in get_components_from_formula(formula[0], level_factor_list_order) :
@@ -469,17 +590,17 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
                     
                     # assumption: a conjunction chain can only contain a factor or its negation
                     # (otherwise the subsequent "else" has to be changed into a new "if")
-                    
-                    st = st  + "\\node[neg] (" + conj + "neg) at ([xshift=\LNeg]" + conj + ".south east) {};\n"
-                    st = st + "\draw[conjunctonsegment] (" + conj + "neg) to (" + formula[1] + "aux);\n"
+                    color_neg = color_map["draw"][conj]
+                    st = st  + "\\node[neg, " + color_neg + "] (" + conj + "neg) at ([xshift=\LNeg]" + conj + ".south east) {};\n"
+                    st = st + "\draw[conjunctonsegment, " + color + "] (" + conj + "neg) to (" + formula[1] + "aux);\n"
                 else :
                     # case B: factor conj occurs non-negated
                     
-                    st = st + "\draw[conjunctonsegment] (" + conj + ".east) to (" + formula[1] + "aux);\n"
+                    st = st + "\draw[conjunctonsegment, " + color + "] (" + conj + ".east) to (" + formula[1] + "aux);\n"
             
             # draw arrow from junction to target factor
             # experimental with tiny label above vertex
-            st = st + "% arrow from junction to target factor\n\draw[->] (" + formula[1] + "aux) -- (" + formula[1] + ") node[draw=none,fill=none,font=\\tiny,above=\LabelDist,pos=0,sloped] {\scalebox{.3}{$" + formula[0].replace("*", "\cdot ").replace("~", "\\neg ") + "$}};\n"
+            st = st + "% arrow from junction to target factor\n\draw[->, " + color + "] (" + formula[1] + "aux) -- (" + formula[1] + ") node[draw=none, text=black, fill=none, font=\\tiny, above=\LabelDist, pos=0, sloped] {\scalebox{.3}{$" + formula[0].replace("*", "\cdot ").replace("~", "\\neg ") + "$}};\n"
             
         else :
             # this should never happen
@@ -492,7 +613,7 @@ def convert_causal_relation(formula, level_factor_list_order, tex_code) :
             
     return st
     
-def convert_constitution_relation(formula, level_factor_list_order, constitution_relation_list) :
+def convert_constitution_relation(formula, level_factor_list_order, constitution_relation_list, color) :
     # converts a formula of constitution relations into TikZ-Latex code
     # returns the code as string
     
@@ -519,15 +640,15 @@ def convert_constitution_relation(formula, level_factor_list_order, constitution
     for fac in get_components_from_formula(formula[0], level_factor_list_order) :           
         if c_left and not(c_right) :
             # case 1: leftside relation
-            st = st + "\draw[crelationleft] (" + fac + ".north west) to (" + formula[1] + ".south);\n"
+            st = st + "\draw[crelationleft, " + color + "] (" + fac + ".north west) to (" + formula[1] + ".south);\n"
     
         elif not(c_left) and c_right :
             # case 2: rightside relation
-            st = st + "\draw[crelationright] (" + fac + ".north east) to (" + formula[1] + ".south);\n"
+            st = st + "\draw[crelationright, " + color + "] (" + fac + ".north east) to (" + formula[1] + ".south);\n"
     
         else: 
             # case 3: otherwise
-            st = st + "\draw[crelationstraight] (" + fac + ".north) to (" + formula[1] + ".south);\n"
+            st = st + "\draw[crelationstraight, " + color + "] (" + fac + ".north) to (" + formula[1] + ".south);\n"
     
     return st
 
@@ -708,12 +829,14 @@ def cull_complex_solutions(solution_list, level_factor_list, level_equiv_list, c
     print("Number of solutions before filtering " + str(len(solution_list)))
     for i in range(len(solution_list)-1,-1,-1) : # regressive for-loop over all elements of solution_list
         # (i goes from [len(solution_list) - 1] to 0)
-        
+
         valid = True
         for term in solution_term_list[i] :
-            # does term not match any valid atomic solution formula?
-            if not(any(get_equiv_formula(term) in j for j in level_equiv_list)) and not(get_equiv_formula(term) in constitution_relation_list) :
-                # explanation: any(a in b for b in c) checks whether a is an element of a sublist of c
+            
+            # is term an invalid formula?
+            if get_formula_level(get_equiv_formula(term)[0], level_factor_list) == -1 :
+                # explanation: get_formula_level is defined to return -1 if the left side of an equivalence (= specified by the "[0]")
+                # mixes terms from different levels
 
                 valid = False  # then flag the corresponding solution as invalid
                 break          # one invalid term is sufficient, leave the for-loop over the terms if one has been found
@@ -999,7 +1122,7 @@ def determine_factor_order(level_factor_list, level_equiv_list) :
     
     
     
-def find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list) :
+def find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list, mode) :
     # this functions is intended to minimise constitution_relation_list and to
     # return the minimal list of constitution relations
     
@@ -1009,6 +1132,20 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
     # e.g. if a lower level causal structure (A*B -> C) * (D*E -> F) * (C*F -> G) constitutes F1 on an upper level,
     # we only want the connectives A <-> F1, B <-> F1, D <-> F1, E <-> F1 and G <-> F1,
     # also relations between F1 and further preconditions of A,B,D,E should be discarded
+    
+    
+    # in case that the plot mode is color, a color map is created, with different specifications for text color and node color
+    # this is done here, since some constitution relations to be discarded are needed for determining the colors of all nodes
+    color_map = { "draw" : {}, "text" : {}}
+    
+    # standard color for all factors is black
+    for m in range(len(level_factor_list_order)) :
+        for o in range(len(level_factor_list_order[m])) :
+            for e in range(len(level_factor_list_order[m][o])) :
+                color_map["draw"][level_factor_list_order[m][o][e]] = "black"
+                color_map["text"][level_factor_list_order[m][o][e]] = "black"
+    
+    color_index = 0 # set index of first color
     
     ################################################################
     # step 7: discard wrong and dispensable constitution realtions #
@@ -1078,6 +1215,17 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
                     entry = (lfac, fac)
                     if not(entry in new_constitution_list) :
                         new_constitution_list.append(entry) 
+                        
+                        if mode == "color" :
+                            # record constitution relation in color_map
+                            color_map["draw"][lfac] = "color" + str(color_index)
+                            color_map["text"][fac] = "color" + str(color_index)
+                
+                # new factor fac gets a new color index        
+                color_index = color_index + 1
+                if color_index > 10 : color_index = 0 # after 11 colors, use the first one again
+                        
+                        
                 
                 # clear the auxiliary list    
                 auxiliary_list.clear()                    
@@ -1143,11 +1291,11 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
     #for c in constitution_relation_list :
     #    print(c[0] + " -- " + c[1]) 
       
-    return return_list
+    return return_list, color_map
 # end of find_structure                   
 
 
-def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list) :
+def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, constitution_relation_list, color_map) :
     # Prepares the TikZ code for plotting one solution
     # a) places the causal factors as nodes separated by causal order (horizontally) and constitution level (vertically)
     # b) adds the causal and constitution relations as vertices between nodes
@@ -1162,7 +1310,7 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
     # step 8a) - placement of the nodes = causal factors #
     ######################################################
     
-    # [possible improvement 1]
+    # [possible improvement]
     # - start with the level thas has the highest number of causal orders (highest horizontal length)
     # here: start with level 1
     
@@ -1178,16 +1326,12 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
             # placement of the factors in their causal order
             # factors of the same order are placed on top of each other
             
-            # [possible improvement 2]
-            # - group factors that appear in the same constitution relations
-            # here: procede according to the sequence in factor_list
-            
             tex_code = tex_code  + "% causal order " + str(o) + ":\n"
             for e in level_factor_list_order[m][o] :
                 
                 # add a line to tex_code in which the node is placed, its name is the same as the one of the causal factor
                 # and it is displayed on a label
-                tex_code = tex_code + "\\node" + placement + " (" + e + ") {$" + e +"$};\n"
+                tex_code = tex_code + "\\node[draw=" + color_map["draw"][e] + ", text=" + color_map["text"][e] + "] " + placement + " (" + e + ") {$" + e +"$};\n"
                 
                 if o == 0 :
                     # highlight incoming factors
@@ -1198,8 +1342,6 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
                     # outgoing factors = those that have no outgoing arrows
                     # They do not appear on the complex side of a causal relation.
                     
-                   
-                    # alt:o == len(level_factor_list_order[m]) - 1 :
                     # highlight outgoing factors
                     tex_code = tex_code + "\hilighttarget{" + e + "};\n"
                 
@@ -1226,12 +1368,26 @@ def print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, cons
         tex_code = tex_code  + "% of level "  + str(m) + "\n"
         for formula in level_equiv_list[m] :
             tex_code = tex_code  + "% formula: "  + formula[0] + " <-> " + formula[1] + "\n"
-            tex_code = tex_code + convert_causal_relation(formula, level_factor_list_order, tex_code) + "\n\n"
+            
+            # standard color is black 
+            color = "black"
+            if color_map["draw"][formula[1]] == color_map["draw"][get_components_from_formula(formula[0], level_factor_list_order)[0]] :
+                # if the color map entry of target node and the first source node (any other would do it likewise) are identical
+                # use their color for plotting the causal relation
+                color = color_map["draw"][formula[1]]
+                
+            tex_code = tex_code + convert_causal_relation(formula, level_factor_list_order, tex_code, color, color_map) + "\n\n"
     
     tex_code = tex_code  + "\n% constitution relations\n"        
     for formula in constitution_relation_list :
         tex_code = tex_code  + "% formula: "  + formula[0] + " <-> " + formula[1] + "\n"
-        tex_code = tex_code + convert_constitution_relation(formula, level_factor_list_order, constitution_relation_list) + "\n"  
+        
+        # standard color is gray
+        color = "gray"
+        if color_map["text"][formula[1]] != "black" :
+            color = color_map["text"][formula[1]]
+        
+        tex_code = tex_code + convert_constitution_relation(formula, level_factor_list_order, constitution_relation_list, color) + "\n"  
     
     
     return tex_code
@@ -1304,6 +1460,18 @@ def main() :
                 print("More than 100 solutions obtained, plotting only the first 100.")
                 for i in range(len(solution_term_list) - 1, 99, -1) :
                     del solution_term_list[i]
+            
+            # there are two plot modes possible:
+            # "bw" - black/white
+            # "color" - in color
+            # The plot mode can be specified when running the script by adding "-c" or "-bw" respectively.
+            # Standard mode is black/white.
+            mode = "bw"
+            if len(sys.argv) > 1 :
+                if sys.argv[1] == "-c" :
+                    mode = "color"
+                elif sys.argv[1] == "-bw" :
+                    mode = "bw"
                         
             for sol in solution_term_list :
 
@@ -1322,12 +1490,16 @@ def main() :
                     if unique :
                         # if the causal order of the factors is uniquely determinable:
                         # step 7 minimalisation of the constitution relations
-                        new_constitution_relation_list = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list)
+                        # in the same step the colors of nodes and node texts are defined                                
+                        new_constitution_relation_list, color_map = find_structure(level_factor_list_order, level_equiv_list, constitution_relation_list, mode)
                         
-                        # step 8: graphical output as a graph in pdf
+                        # rearrange the factors in the factor for improved placement in the plot
+                        new_level_factor_list_order = rearrange_level_factor_list(level_factor_list_order, level_equiv_list, new_constitution_relation_list)
                         
-                        # generating the tex-code
-                        st = print_structure_in_tikz_plot(level_factor_list_order, level_equiv_list, new_constitution_relation_list)
+                        # step 8: graphical output as a graph in pdf                        
+                        
+                        # generating the tex-code                            
+                        st = print_structure_in_tikz_plot(new_level_factor_list_order, level_equiv_list, new_constitution_relation_list, color_map)
                         
                         # subtitle of the graph will be the formula in tex-math syntax
                         subtitle = "\\tiny $"
