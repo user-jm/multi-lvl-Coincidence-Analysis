@@ -1221,9 +1221,11 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
                             color_map["draw"][lfac] = "color" + str(color_index)
                             color_map["text"][fac] = "color" + str(color_index)
                 
-                # new factor fac gets a new color index        
-                color_index = color_index + 1
-                if color_index > 10 : color_index = 0 # after 11 colors, use the first one again
+                
+                if auxiliary_list :
+                    # if the color has been used for fac, the next factor gets a new color index        
+                    color_index = color_index + 1
+                    if color_index > 11 : color_index = 0 # after 11 colors, use the first one again
                         
                         
                 
