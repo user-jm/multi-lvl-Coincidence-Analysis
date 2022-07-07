@@ -1,55 +1,36 @@
 --- Coincidence Analysis (CNA) ---
 
 Causal ordering:
-E1, E2, E3, E4, E5, E6, E7 < F1, F2, F3, F4, F5, F6, F7 < G
+F1, F2, F3, F4, F5, F6, F7 < A, B, C
 
 Atomic solution formulas:
 -------------------------
-Outcome E1:
- solution  consistency coverage complexity inus
- E2 <-> E1           1        1          1 TRUE
- E3 <-> E1           1        1          1 TRUE
- E4 <-> E1           1        1          1 TRUE
+Outcome A:
+ solution    consistency coverage complexity inus
+ F4 <-> A              1        1          1 TRUE
+ F1*F2 <-> A           1        1          2 TRUE
 
-Outcome E2:
- solution  consistency coverage complexity inus
- E1 <-> E2           1        1          1 TRUE
- E3 <-> E2           1        1          1 TRUE
- E4 <-> E2           1        1          1 TRUE
+Outcome B:
+ solution consistency coverage complexity inus
+ F3 <-> B           1        1          1 TRUE
+ F5 <-> B           1        1          1 TRUE
+ F6 <-> B           1        1          1 TRUE
 
-Outcome E3:
- solution  consistency coverage complexity inus
- E1 <-> E3           1        1          1 TRUE
- E2 <-> E3           1        1          1 TRUE
- E4 <-> E3           1        1          1 TRUE
-
-Outcome E4:
- solution  consistency coverage complexity inus
- E1 <-> E4           1        1          1 TRUE
- E2 <-> E4           1        1          1 TRUE
- E3 <-> E4           1        1          1 TRUE
-
-Outcome E5:
- solution  consistency coverage complexity inus
- E6 <-> E5           1        1          1 TRUE
- E7 <-> E5           1        1          1 TRUE
-
-Outcome E6:
- solution  consistency coverage complexity inus
- E5 <-> E6           1        1          1 TRUE
- E7 <-> E6           1        1          1 TRUE
-
-Outcome E7:
- solution  consistency coverage complexity inus
- E5 <-> E7           1        1          1 TRUE
- E6 <-> E7           1        1          1 TRUE
-
-Outcome F1:
- solution  consistency coverage complexity inus
- E1 <-> F1           1        1          1 TRUE
- E2 <-> F1           1        1          1 TRUE
- E3 <-> F1           1        1          1 TRUE
- E4 <-> F1           1        1          1 TRUE
+Outcome C:
+ solution       consistency coverage complexity inus
+ F7 <-> C                 1        1          1 TRUE
+ F3*F4 <-> C              1        1          2 TRUE
+ F3*A <-> C               1        1          2 TRUE
+ F4*F5 <-> C              1        1          2 TRUE
+ F4*F6 <-> C              1        1          2 TRUE
+ F4*B <-> C               1        1          2 TRUE
+ F5*A <-> C               1        1          2 TRUE
+ F6*A <-> C               1        1          2 TRUE
+ A*B <-> C                1        1          2 TRUE
+ F1*F2*F3 <-> C           1        1          3 TRUE
+ F1*F2*F5 <-> C           1        1          3 TRUE
+ F1*F2*F6 <-> C           1        1          3 TRUE
+ F1*F2*B <-> C            1        1          3 TRUE
 
 Outcome F3:
  solution  consistency coverage complexity inus
@@ -58,10 +39,6 @@ Outcome F3:
 
 Outcome F4:
  solution     consistency coverage complexity inus
- E1*F2 <-> F4           1        1          2 TRUE
- E2*F2 <-> F4           1        1          2 TRUE
- E3*F2 <-> F4           1        1          2 TRUE
- E4*F2 <-> F4           1        1          2 TRUE
  F1*F2 <-> F4           1        1          2 TRUE
 
 Outcome F5:
@@ -76,50 +53,3402 @@ Outcome F6:
 
 Outcome F7:
  solution        consistency coverage complexity inus
- E5 <-> F7                 1        1          1 TRUE
- E6 <-> F7                 1        1          1 TRUE
- E7 <-> F7                 1        1          1 TRUE
  F3*F4 <-> F7              1        1          2 TRUE
  F4*F5 <-> F7              1        1          2 TRUE
  F4*F6 <-> F7              1        1          2 TRUE
- E1*F2*F3 <-> F7           1        1          3 TRUE
- E1*F2*F5 <-> F7           1        1          3 TRUE
- E1*F2*F6 <-> F7           1        1          3 TRUE
- E2*F2*F3 <-> F7           1        1          3 TRUE
- E2*F2*F5 <-> F7           1        1          3 TRUE
- E2*F2*F6 <-> F7           1        1          3 TRUE
- E3*F2*F3 <-> F7           1        1          3 TRUE
- E3*F2*F5 <-> F7           1        1          3 TRUE
- E3*F2*F6 <-> F7           1        1          3 TRUE
- E4*F2*F3 <-> F7           1        1          3 TRUE
- E4*F2*F5 <-> F7           1        1          3 TRUE
- E4*F2*F6 <-> F7           1        1          3 TRUE
  F1*F2*F3 <-> F7           1        1          3 TRUE
  F1*F2*F5 <-> F7           1        1          3 TRUE
  F1*F2*F6 <-> F7           1        1          3 TRUE
 
-Outcome G:
- solution       consistency coverage complexity inus
- E5 <-> G                 1        1          1 TRUE
- E6 <-> G                 1        1          1 TRUE
- E7 <-> G                 1        1          1 TRUE
- F7 <-> G                 1        1          1 TRUE
- F3*F4 <-> G              1        1          2 TRUE
- F4*F5 <-> G              1        1          2 TRUE
- F4*F6 <-> G              1        1          2 TRUE
- E1*F2*F3 <-> G           1        1          3 TRUE
- E1*F2*F5 <-> G           1        1          3 TRUE
- E1*F2*F6 <-> G           1        1          3 TRUE
- E2*F2*F3 <-> G           1        1          3 TRUE
- E2*F2*F5 <-> G           1        1          3 TRUE
- E2*F2*F6 <-> G           1        1          3 TRUE
- E3*F2*F3 <-> G           1        1          3 TRUE
- E3*F2*F5 <-> G           1        1          3 TRUE
- E3*F2*F6 <-> G           1        1          3 TRUE
- E4*F2*F3 <-> G           1        1          3 TRUE
- E4*F2*F5 <-> G           1        1          3 TRUE
- E4*F2*F6 <-> G           1        1          3 TRUE
- F1*F2*F3 <-> G           1        1          3 TRUE
- F1*F2*F5 <-> G           1        1          3 TRUE
- F1*F2*F6 <-> G           1        1          3 TRUE
-[1] "(E1 <-> E2)*(E1 <-> E3)*(E2*E3 <-> E4)*(E5 <-> E6)*(E6 <-> E7)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5*F6 <-> F7)*(E1 <-> F1)*(E4 <-> F1)*(E5 <-> F7)*(E7 <-> F7)*(F1*F2*F3 <-> G)*(F7 <-> G)"
+Complex solution formulas:
+--------------------------
+ outcome          
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F6,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F4,F5,F6,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F5,F7
+ A,B,C,F3,F4,F6,F7
+ solution                                                                                    
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)      
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)      
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F5 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)    
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)     
+ (F4 <-> A)*(F6 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)     
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F3 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F5 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F4*F6 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3*F4 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F5 <-> F7)   
+ (F1*F2 <-> A)*(F6 <-> B)*(F7 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F4*F6 <-> F7)   
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F3*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F5 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*F6 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F4*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F5*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(F6*A <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7) 
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)  
+ (F4 <-> A)*(F3 <-> B)*(A*B <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)  
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F3 <-> F5)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F1*F2 <-> F4)*(F6 <-> F5)*(F3 <-> F6)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F5 <-> F3)*(F1*F2 <-> F4)*(F6 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F3 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F5 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F3 <-> F5)*(F1*F2*F6 <-> F7)
+ (F4 <-> A)*(F5 <-> B)*(F3*F4 <-> C)*(F6 <-> F3)*(F1*F2 <-> F4)*(F5 <-> F6)*(F1*F2*F3 <-> F7)
+ consistency coverage complexity inus
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1          9 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         10 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE
+           1        1         11 TRUE

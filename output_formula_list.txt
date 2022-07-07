@@ -1,0 +1,54 @@
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \cdot F4 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F4 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F4 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F3 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F5 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F3 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F5 \leftrightarrow  F6)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F3 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F5 \leftrightarrow  F7)$$
+$$(A \cdot B \leftrightarrow  C)\cdot(F6 \leftrightarrow  F3)\cdot(F1 \cdot F2 \leftrightarrow  F4)\cdot(F6 \leftrightarrow  F5)\cdot(F1 \cdot F2 \cdot F6 \leftrightarrow  F7)$$

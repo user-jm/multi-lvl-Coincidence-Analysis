@@ -2,7 +2,7 @@
 
 # file: causal_structure_R_data_to_pdf_graph.py
 
-# This script reads the output of a Coincidence Analysis (CNA) of some given truth table of a tiered list
+# This script reads the output of a Coincidence Analysis (CNA) of a given truth table of a tiered list
 # of causal factors and attempts to generate causal graphs for each unique solution. These are finally exported
 # into a graph in Latex TikZ-code. Therefore latex and the tikz library have to be installed on the system running this script. 
 # It assumes that the causal factors pertain to different levels, which are separated by the cna causal ordering relation "<".
@@ -1218,7 +1218,7 @@ def find_structure(level_factor_list_order, level_equiv_list, constitution_relat
                     if not(entry in new_constitution_list) :
                         new_constitution_list.append(entry) 
                         
-                        if mode == "color" :
+                        if "color" in mode:
                             # record constitution relation in color_map
                             color_map["draw"][lfac] = "color" + str(color_index)
                             color_map["text"][fac] = "color" + str(color_index)
@@ -1407,7 +1407,7 @@ def create_pdf(tex_code_table, latex_template_file) :
     template = latex_jinja_env.get_template(latex_template_file)
     render = template.render(data = tex_code_table, maxnumber = len(tex_code_table))
     
-    # save the generarted string as tex file
+    # save the generated string as tex file
     f = open(output_file, 'wb')
     f.write(render.encode('utf-8'))
     f.close()
@@ -1423,6 +1423,22 @@ def create_pdf(tex_code_table, latex_template_file) :
     # remove automatically generated log files
     os.remove(str(output_file[:-4]+".log"))
     os.remove(str(output_file[:-4]+".aux"))
+
+def create_separtate_formula_list(formula_list):
+   # if the optional parameter "-fl" or "--fulllist" has been set,
+   # create also a text file listing all possible causal structures as tex-formulae
+   
+    output_file = "output_formula_list.txt"
+    
+    # write the formulae to output_file
+    f = open(output_file, 'w')
+    for formula in formula_list:
+     f.write(formula)
+     f.write('\n')  # line break after each formula
+    f.close()
+    
+    
+
                    
 def main() :
     # main function
@@ -1465,17 +1481,30 @@ def main() :
                 for i in range(len(solution_term_list) - 1, 99, -1) :
                     del solution_term_list[i]
             
+            
+            mode = []  # list of special output modes depending on optional parameters (see below)
+            
             # there are two plot modes possible:
             # "bw" - black/white
             # "color" - in color
             # The plot mode can be specified when running the script by adding "-c" or "-bw" respectively.
-            # Standard mode is black/white.
-            mode = "bw"
-            if len(sys.argv) > 1 :
-                if sys.argv[1] == "-c" :
-                    mode = "color"
-                elif sys.argv[1] == "-bw" :
-                    mode = "bw"
+            mode.append("bw") # Standard mode is black/white.
+            
+            if any(arg == "-c" or arg == "--color" for arg in sys.argv) : 
+                # sys.argv is the list of arguments given when executing the script.
+                mode.append("color")                          # e.g. python script.py -c (The script ifself is one element of sys.argv.)
+                mode.remove("bw")
+            elif any(arg == "-bw" or arg == "--blackwhite" for arg in sys.argv) : 
+                # Extra case for black/white, just in case that the standard mode will be changed.
+                mode.append("bw")
+                
+            
+            # further option: Exports a second pdf-file containing the full list of possible causal structures as formulae            
+            if any(arg == "-fl" or arg == "--fulllist" for arg in sys.argv) : 
+                # sys.argv is the list of arguments given when executing the script.
+                mode.append("fulllist")                       # e.g. python script.py -c -fl (The script ifself is one element of sys.argv.)
+                separate_formula_list = []                    # list of formulae in tex-code
+                        
                         
             for sol in solution_term_list :
 
@@ -1506,11 +1535,16 @@ def main() :
                         st = print_structure_in_tikz_plot(new_level_factor_list_order, level_equiv_list, new_constitution_relation_list, color_map)
                         
                         # subtitle of the graph will be the formula in tex-math syntax
-                        subtitle = "\\tiny $"
+                        subtitle = "$"
                         for term in sol :
                             subtitle = subtitle + "(" + term.replace("*", " \cdot ").replace("~", "\\neg ").replace("<->", "\leftrightarrow ") + ")\cdot"
                         
-                        subtitle = subtitle[:-5] + "$"
+                        subtitle = subtitle[:-5] + "$"  # remove the "\cdot" at the end of the last term
+                        
+                        if "fulllist" in mode:          # when in fulllist mode, append the formula to the list to be exported
+                            separate_formula_list.append("$" + subtitle + "$")
+                        
+                        subtitle = "\\tiny " + subtitle # formulae might be quite long, so subtitle should be written in tiny
                         
                         if circular :
                             subtitle = "circular causal structure\\\\[4mm]" + subtitle
@@ -1519,7 +1553,7 @@ def main() :
                         counter = counter + 1
                         entry = (counter, st, subtitle)
                         tex_table.append(entry)
-                        
+                     
                         
                     else :
                         # unique == False
@@ -1542,7 +1576,9 @@ def main() :
                 else :
                     abort = True
                     print("Error: Cannot plot the graphs since the expected template file " + latex_template_file + " does not exist in path folder.")
-            
+                if "fulllist" in mode:
+                    # create file
+                    create_separtate_formula_list(separate_formula_list)
         else :
             # solution_list is empty
             # no solution survived selection of valid solutions
